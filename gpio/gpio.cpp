@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <wiringPi.h>
 
+using namespace std;
 
 Gpio::Gpio(void)
 {
