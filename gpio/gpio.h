@@ -2,6 +2,10 @@
  * 
  * (c) Copyright 2014, Fabien Papleux, All Rights Reserved.
  * 
+ * The GPIO library forms a class wrapper for the wiringPi functions.
+ * I am only implementing the methods and properties that I want to
+ * leverage in other parts of the code.
+ * 
  * This library uses the pin numbering used by wiringPi.
  * +----------+-Rev2-+------+--------+------+-------+
  * | wiringPi | GPIO | Phys | Name   | Mode | Value |
@@ -39,16 +43,37 @@ using namespace std;
 class Gpio
 {
 	private:
-		int ready; // Indicates whether Gpio is ready for use
+		int ready;				// Indicates whether Gpio is ready for use
+		int piRev;				// 0 for Rev.A and 1 for Rev.B, as returned by piRevBoard
+		const char* i2cMaster;	// Name of the I2C bus master on the Raspi
+		bool i2cSlave[128];		// indicates whether a slave is ready or not.
+		int i2cFd;				// file descriptor for the current I2C bus
 	
 	public:
 		Gpio(void);
 		~Gpio(void);
-		int isReady(void);
-		int initialize(void);
-		void pinMode(int pin, int mode);
-		void digitalWrite(int pin, int value);
-		int digitalRead(int pin);
+		
+		// Basic Pi/GPIO interface
+		int 	setup			(void);
+		int 	isReady			(void);
+		int		piBoardRev		(void);
+		void 	pinMode			(int pin, int mode);
+		void 	digitalWrite	(int pin, int value);
+		int 	digitalRead		(int pin);
+		
+		// I2C interface -- uses physical pin 3 for SDA and 5 for SCL
+		// Note: this implementation wraps wiringPi a little differently
+		// in order to make it easier to implement multiple I2C devices
+		int 	i2cSetup();
+		int 	isI2CReady();
+		int		connectSlave(int address);
+		
+		// Arduino methods from the wiringPi module
+		void	delay			(unsigned int howLong);
+		void	delayMicroseconds (unsigned int howLong);
+		unsigned int millis	(void);
+		unsigned int micros	(void);
+
 };
 
 #endif

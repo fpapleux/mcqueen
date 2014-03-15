@@ -9,60 +9,138 @@
 #ifndef __GPIO_CPP
 #define __GPIO_CPP
 
+namespace wpi {
+	#include <wiringPi.h>
+}
+
+namespace i2c {
+	#include <wiringPiI2C.h>
+}
+
+#include <iostream>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <stdint.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
 #include "gpio.h"
-#include <stdio.h>
-#include <wiringPi.h>
 
 using namespace std;
 
+
+/******************************************************************/
 Gpio::Gpio(void)
 {
-	if (wiringPiSetup() != -1) ready = 1; else ready = 0;
+	int i;
+	ready = 0;
+	piRev = -1;
+	i2cFd = 0;
+	for (i = 0; i <= 127; i++) i2cSlave[i] = false;
+	setup();
 };
 
+/******************************************************************/
 Gpio::~Gpio(void)
 {
 	ready = 0;
 };
 
-int Gpio::initialize(void)
+/******************************************************************/
+int Gpio::setup(void)
 {
-	if (wiringPiSetup() != -1) ready = 1; else ready = 0;
+	if (wpi::wiringPiSetup() != -1) ready = 1; else ready = 0;
 	return ready;
 };
 
+/******************************************************************/
 int Gpio::isReady(void)
 {
 	return ready;
 };
 
-void Gpio::pinMode (int pin, int mode)
+/******************************************************************/
+int Gpio::piBoardRev (void)
 {
-	if (this->ready) pinMode(pin, mode);
-	else printf("GPIO not ready.");
+	if (piRev == -1) piRev = wpi::piBoardRev();
+	return piRev;
 };
 
+/******************************************************************/
+void Gpio::pinMode (int pin, int mode)
+{
+	if (ready) wpi::pinMode(pin, mode);
+	else cout << "GPIO not ready.";
+};
+
+/******************************************************************/
 void Gpio::digitalWrite (int pin, int value)
 {
-	if (! this->ready) 
+	if (! ready) 
 	{
-		printf("GPIO not ready.");
+		cout << "GPIO not ready.";
 		return;
 	}
 	if (value != 0) value = HIGH; else value = LOW;
-	digitalWrite(pin, value);
+	wpi::digitalWrite(pin, value);
 	return;
 };
 
+/******************************************************************/
 int Gpio::digitalRead (int pin)
 {
-	if (! this->ready) 
+	if (! ready) 
 	{
-		printf("GPIO not ready.");
+		cout << "GPIO not ready.";
 		return -1;
 	}
-	return digitalRead(pin);
+	return wpi::digitalRead(pin);
 };
+
+/******************************************************************/
+void Gpio::delay (unsigned int howLong)
+{
+	wpi::delay(howLong);
+};
+
+/******************************************************************/
+void Gpio::delayMicroseconds (unsigned int howLong)
+{
+	wpi::delayMicroseconds(howLong);
+};
+
+/******************************************************************/
+unsigned int Gpio::millis (void)
+{
+	return wpi::millis();
+};
+
+/******************************************************************/
+unsigned int Gpio::micros (void)
+{
+	return wpi::micros();
+};
+
+/******************************************************************/
+int Gpio::i2cSetup()
+{
+	if (piBoardRev() == 1)
+		i2cMaster = "/dev/i2c-0";
+	else
+		i2cMaster = "/dev/i2c-1";
+
+	if ((i2cFd = open (i2cMaster, O_RDWR)) < 0)
+		return 0;
+	else return i2cFd;
+};
+
+/******************************************************************/
+int Gpio::isI2CReady()
+{
+	return i2cFd;
+};
+
+
+
 
 
 
@@ -70,23 +148,12 @@ int whatever()
 {
 	
 	/*
-	 * Testing led blinking on pin 7 on the base wiringPi. Works great.
-		int c;
-		pinMode(7, OUTPUT);
-		for (c = 0; c < 20; c++) {
-			digitalWrite(7, HIGH);
-			delay(1000);
-			digitalWrite(7, LOW);
-			delay(1000);
-		}
 
 	int i2c = 0;
 	if ((i2c = wiringPiI2CSetup(0x40)) == -1) {
 		printf("\nCould not initialize the I2C device at address 0x40\n");
 		return 1;
 	}
-	
-	printf ("I2C device initialized");
 	
 	Wire.begin();
 	// Adafruit_PWMServoDriver* driver = new Adafruit_PWMServoDriver(0x40);
