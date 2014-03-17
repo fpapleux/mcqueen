@@ -1,6 +1,6 @@
 /* GPIO.CPP
  * 
- * (c) Copyright 2014, Fabien Papleux. All Rights Reserved.
+ * Author: Fabien Papleux
  * 
  */ 
 
@@ -18,25 +18,23 @@ namespace i2c {
 }
 
 #include <iostream>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <stdint.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include "gpio.h"
 
-using namespace std;
+// I2C definitions
+#define I2C_SLAVE	0x0703
 
+using namespace std;
 
 /******************************************************************/
 Gpio::Gpio(void)
 {
-	int i;
 	ready = 0;
 	piRev = -1;
-	i2cFd = 0;
-	for (i = 0; i <= 127; i++) i2cSlave[i] = false;
-	setup();
+	i2cFd = -1;
+	i2cSlave = -1;
+	init();
 };
 
 /******************************************************************/
@@ -46,7 +44,7 @@ Gpio::~Gpio(void)
 };
 
 /******************************************************************/
-int Gpio::setup(void)
+int Gpio::init(void)
 {
 	if (wpi::wiringPiSetup() != -1) ready = 1; else ready = 0;
 	return ready;
@@ -88,7 +86,7 @@ void Gpio::digitalWrite (int pin, int value)
 /******************************************************************/
 int Gpio::digitalRead (int pin)
 {
-	if (! ready) 
+	if (! ready)
 	{
 		cout << "GPIO not ready.";
 		return -1;
@@ -121,8 +119,9 @@ unsigned int Gpio::micros (void)
 };
 
 /******************************************************************/
-int Gpio::i2cSetup()
+int Gpio::i2cInit()
 {
+	if (! ready) return 0;
 	if (piBoardRev() == 1)
 		i2cMaster = "/dev/i2c-0";
 	else
@@ -130,37 +129,89 @@ int Gpio::i2cSetup()
 
 	if ((i2cFd = open (i2cMaster, O_RDWR)) < 0)
 		return 0;
-	else return i2cFd;
+	else 
+		return 1;
 };
 
 /******************************************************************/
-int Gpio::isI2CReady()
+int Gpio::i2cIsReady()
 {
-	return i2cFd;
+	return (i2cFd < 0 ? 0 : 1);
+};
+
+/******************************************************************/
+int Gpio::i2cConnectSlave(int address)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (ioctl (i2cFd, I2C_SLAVE, address) < 0)
+		return -1;
+	i2cSlave = address;
+	return 1;
+};
+
+/******************************************************************/
+int	Gpio::i2cRead (int dev)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CRead (i2cFd);
+};
+
+/******************************************************************/
+int	Gpio::i2cReadReg8 (int dev, int reg)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CReadReg8 (i2cFd, reg);
+};
+
+/******************************************************************/
+int	Gpio::i2cReadReg16 (int dev, int reg)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CReadReg16 (i2cFd, reg);
+};
+
+/******************************************************************/
+int	Gpio::i2cWrite (int dev, int data)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CWrite (i2cFd, data);
+};
+
+/******************************************************************/
+int	Gpio::i2cWriteReg8 (int dev, int reg, int data)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CWriteReg8 (i2cFd, reg, data);
+};
+
+/******************************************************************/
+int	Gpio::i2cWriteReg16 (int dev, int reg, int data)
+{
+	if (! ready) return -1;		// GPIO not set up
+	if (i2cFd < 0) return -1;	// I2C bus not set up
+	if (dev != i2cSlave)
+		if (! i2cConnectSlave(dev)) return -1;
+	return i2c::wiringPiI2CWriteReg16 (i2cFd, reg, data);
 };
 
 
 
 
-
-
-int whatever()
-{
-	
-	/*
-
-	int i2c = 0;
-	if ((i2c = wiringPiI2CSetup(0x40)) == -1) {
-		printf("\nCould not initialize the I2C device at address 0x40\n");
-		return 1;
-	}
-	
-	Wire.begin();
-	// Adafruit_PWMServoDriver* driver = new Adafruit_PWMServoDriver(0x40);
-	
-	*/
-	
-	return 0;
-};
 
 #endif

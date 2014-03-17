@@ -1,6 +1,8 @@
 /* GPIO.H
  * 
- * (c) Copyright 2014, Fabien Papleux, All Rights Reserved.
+ * Author: Fabien Papleux
+ * 
+ * Thanks: Gordon Henderson for wiringPi
  * 
  * The GPIO library forms a class wrapper for the wiringPi functions.
  * I am only implementing the methods and properties that I want to
@@ -46,7 +48,7 @@ class Gpio
 		int ready;				// Indicates whether Gpio is ready for use
 		int piRev;				// 0 for Rev.A and 1 for Rev.B, as returned by piRevBoard
 		const char* i2cMaster;	// Name of the I2C bus master on the Raspi
-		bool i2cSlave[128];		// indicates whether a slave is ready or not.
+		int i2cSlave;			// Keeps number of the last i2c slave selected
 		int i2cFd;				// file descriptor for the current I2C bus
 	
 	public:
@@ -54,7 +56,7 @@ class Gpio
 		~Gpio(void);
 		
 		// Basic Pi/GPIO interface
-		int 	setup			(void);
+		int 	init			(void);
 		int 	isReady			(void);
 		int		piBoardRev		(void);
 		void 	pinMode			(int pin, int mode);
@@ -64,9 +66,15 @@ class Gpio
 		// I2C interface -- uses physical pin 3 for SDA and 5 for SCL
 		// Note: this implementation wraps wiringPi a little differently
 		// in order to make it easier to implement multiple I2C devices
-		int 	i2cSetup();
-		int 	isI2CReady();
-		int		connectSlave(int address);
+		int 	i2cInit();
+		int 	i2cIsReady();
+		int		i2cConnectSlave	(int address);
+		int		i2cRead			(int dev);
+		int		i2cReadReg8		(int dev, int reg);
+		int		i2cReadReg16	(int dev, int reg);
+		int		i2cWrite		(int dev, int data);
+		int		i2cWriteReg8	(int dev, int reg, int data);
+		int		i2cWriteReg16 	(int dev, int reg, int data);
 		
 		// Arduino methods from the wiringPi module
 		void	delay			(unsigned int howLong);
