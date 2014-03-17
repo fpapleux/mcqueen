@@ -21,7 +21,7 @@ int pca9685::init ()
 {
 	gpio->init();
 	gpio->i2cInit();
-	return setPwmFrequency(pwmFrequency);
+	return 1;
 };
 
 int pca9685::init (int newAddress)
