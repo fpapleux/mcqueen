@@ -1,12 +1,12 @@
 #include <iostream>
 #include <wiringPi.h>
-#include "pca9685/pca9685.h"
+#include "Pca9685/Pca9685.h"
 
 using namespace std;
 
 int main (int argv, char** args)
 {
-	pca9685 i2c;
+	Pca9685 i2c;
 	
 	i2c.init();
 	
