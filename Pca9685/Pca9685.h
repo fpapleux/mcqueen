@@ -12,13 +12,13 @@
 using namespace std;
 
 #define OSC_CLOCK 			25000000
-#define SCALE					4096
-#define PRESCALE_REG			0xfe
+#define SCALE				4096
+#define PRESCALE_REG		0xfe
 
-#define MODE1					0x00
+#define MODE1				0x00
 #define MODE1_RESTART		0x80
-#define MODE1_EXTCLK			0x40
-#define MODE1_AI				0x20
+#define MODE1_EXTCLK		0x40
+#define MODE1_AI			0x20
 #define MODE1_SLEEP			0x10
 #define MODE1_SUB1			0x08
 #define MODE1_SUB2			0x04
