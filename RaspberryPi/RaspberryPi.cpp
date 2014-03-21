@@ -10,11 +10,8 @@
 
 #include <iostream>
 #include <sys/ioctl.h>
-
-namespace wpi {
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
-}
 
 #include "RaspberryPi.h"
 
@@ -38,9 +35,9 @@ RaspberryPi::~RaspberryPi (void)
 /********************************************************************/
 void RaspberryPi::init (void)
 {
-	if (wpi::wiringPiSetup() != -1) ready = 1; else ready = -1;
+	if (wiringPiSetup() != -1) ready = 1; else ready = -1;
 	if (ready) {
-		if (piRev == -1) piRev = wpi::piBoardRev();
+		if (piRev == -1) piRev = piBoardRev();
 		initDigitalPins();
 		initI2cMaster();
 	}
@@ -59,7 +56,7 @@ void RaspberryPi::initDigitalPins (void)
 void RaspberryPi::initI2cMaster(void)
 {
 	if (!ready) return;
-	if (wpi::piBoardRev() == 1) i2cMasterPath = "/dev/i2c-0"; else i2cMasterPath = "/dev/i2c-1";
+	if (piBoardRev() == 1) i2cMasterPath = "/dev/i2c-0"; else i2cMasterPath = "/dev/i2c-1";
 	i2cMaster = new I2cMaster(&i2cMasterPath);
 }
 
@@ -81,7 +78,7 @@ int RaspberryPi::isI2cReady(void) {
 int RaspberryPi::getPiRev(void) {
 	// Need to figure out what different values are returned by piBoardRev
 	if (piRev == -1)
-		piRev = wpi::piBoardRev();
+		piRev = piBoardRev();
 	return piRev;
 }
 

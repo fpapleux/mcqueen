@@ -43,7 +43,7 @@ private:
 	int 	ready;				// Indicates that the controller was initialized successfully
 	int 	piRev;				// Holds Pi board revision (0 for Rev.A, 1 for Rev.B)
 	int		i2cReady;
-	char	i2cMasterPath[40];
+	char*	i2cMasterPath;
 	int		i2cFd;
 
 	void	close				(void);
