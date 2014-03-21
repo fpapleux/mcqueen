@@ -15,14 +15,15 @@ class I2cMaster {
 public:
 	I2cMaster (char* address);
 	~I2cMaster (void);
-	void init (char* address);
-	void close ();
+
+	void 	init (char* address);
+	void 	close (void);
+	int 	isReady (void);
 
 private:
 	int ready;
 	int fd;
 	I2cSlave* slave[32];
 };
-
 
 #endif /* I2CBUS_H_ */

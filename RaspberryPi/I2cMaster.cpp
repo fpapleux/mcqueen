@@ -30,15 +30,19 @@ I2cMaster::~I2cMaster (void)
 /************************************************/
 void I2cMaster::init (char* address)
 {
-	if ((fd = open(i2cMasterPath, O_RDWR)) < 0) i2cReady = -1; else i2cReady = 1;
-
+	if ((fd = open(address, O_RDWR)) < 0) ready = -1; else ready = 1;
 }
 
 /************************************************/
-void I2cMaster::close ()
+void I2cMaster::close (void)
 {
 }
 
+/************************************************/
+int I2cMaster::isReady (void)
+{
+	return ready;
+}
 
 
 
