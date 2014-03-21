@@ -8,7 +8,7 @@
 #ifndef I2CMASTER_H_
 #define I2CMASTER_H_
 
-#include "I2cSlave.h";
+#include "I2cSlave.h"
 
 class I2cMaster {
 
