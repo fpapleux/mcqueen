@@ -13,7 +13,7 @@
 #ifndef RASPBERRYPI_H_
 #define RASPBERRYPI_H_
 
-#include "I2cMaster.H"
+#include "I2cMaster.h"
 
 #define I2C_SLAVE	0x0703
 
