@@ -13,10 +13,10 @@
 class I2cMaster {
 
 public:
-	I2cMaster (char* address);
+	I2cMaster (const char* address);
 	~I2cMaster (void);
 
-	void 	init (char* address);
+	void 	init (const char* address);
 	void 	close (void);
 	int 	isReady (void);
 

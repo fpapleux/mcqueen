@@ -12,7 +12,7 @@
 using namespace std;
 
 /************************************************/
-I2cMaster::I2cMaster (char* path)
+I2cMaster::I2cMaster (const char* path)
 {
 	int i;
 	fd = -1;
@@ -28,7 +28,7 @@ I2cMaster::~I2cMaster (void)
 }
 
 /************************************************/
-void I2cMaster::init (char* address)
+void I2cMaster::init (const char* address)
 {
 	if ((fd = open(address, O_RDWR)) < 0) ready = -1; else ready = 1;
 }
