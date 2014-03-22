@@ -17,7 +17,7 @@ I2cMaster::I2cMaster (const char* path)
 {
 	fd = -1;
 	ready = -1;
-	for (int i = 0; i < 64; i++) i2cSlave[i] = -1;
+	for (int i = 0; i < 64; i++) i2cSlave[i] = NULL;
 	init (path);
 }
 
@@ -37,7 +37,7 @@ void I2cMaster::init (const char* address)
 void I2cMaster::close (void)
 {
 	for (int i = 0; i < 64; i++)
-		if (i2cSlave[i] != -1) delete i2cSlave[i];
+		if (i2cSlave[i] != NULL) delete i2cSlave[i];
 }
 
 /************************************************/
