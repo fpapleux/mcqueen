@@ -14,6 +14,7 @@
 #include <wiringPiI2C.h>
 
 #include "RaspberryPi.h"
+#include "I2cMaster.h"
 
 using namespace std;
 
@@ -72,6 +73,12 @@ int RaspberryPi::getPiRev(void)
 	if (piRev == -1)
 		piRev = piBoardRev();
 	return piRev;
+}
+
+/******************************************************************/
+I2cMaster* RaspberryPi::getI2cMaster(char* busname)
+{
+	return i2cMaster;
 }
 
 #endif
