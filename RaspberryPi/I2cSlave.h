@@ -12,7 +12,7 @@ class I2cSlave {
 
 public:
 	I2cSlave (char* initString);
-	virtual ~I2cSlave (void);
+	~I2cSlave (void);
 	virtual void init (char* initString);
 	virtual void close (void);
 	virtual void write8 (int data);

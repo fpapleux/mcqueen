@@ -21,7 +21,7 @@ using namespace std;
 RaspberryPi::RaspberryPi (void)
 {
 	ready = -1;
-	i2cMasterPath = "";
+	i2cMasterPath = (char*) "";
 	piRev = -1;
 	init();
 }

@@ -6,8 +6,8 @@ LDTRAIL=-lwiringPi
 
 all:			test
 
-test:			test.o I2cMaster.o RaspberryPi.o
-	$(CC) $(LDFLAGS) RaspberryPi.o test.o -o test $(LDTRAIL)
+test:			I2cMaster.o RaspberryPi.o test.o
+	$(CC) $(LDFLAGS) I2cMaster.o RaspberryPi.o test.o -o test $(LDTRAIL)
 
 test.o: 		test.cpp
 	$(CC) $(CFLAGS) test.cpp $(CTRAIL)
