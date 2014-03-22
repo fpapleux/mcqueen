@@ -47,12 +47,13 @@ int I2cMaster::isReady (void)
 }
 
 /******************************************************************/
-I2cSlave* I2cMaster::addI2cSlave (const char* type, int address)
+I2cSlave* I2cMaster::addI2cSlave (int type, int address)
 {
 	if (i2cSlave[address]) delete i2cSlave[address];
 	switch (type) {
-		case "PCA9685":		i2cSlave[address] = new I2cSlave_PCA9685(address);
-							break;
+		case I2C_PCA9685:
+				i2cSlave[address] = new I2cSlave_PCA9685(address);
+				break;
 	}
 	return i2cSlave[address];
 }

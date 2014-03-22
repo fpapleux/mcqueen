@@ -10,6 +10,10 @@
 
 #include "I2cSlave.h"
 
+// codes to use to define the type of I2cSlave you are adding using in addI2cSlave
+#define I2C_PCA9685		1
+
+
 class I2cMaster {
 
 public:
@@ -19,7 +23,7 @@ public:
 	void 		init 			(const char* address);
 	void 		close 			(void);
 	int 		isReady 		(void);
-	I2cSlave*	addI2cSlave		(const char* type, int address);
+	I2cSlave*	addI2cSlave		(int type, int address);
 
 private:
 	int ready;
