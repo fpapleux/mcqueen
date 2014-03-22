@@ -30,7 +30,7 @@ public:
 	int		isReady		(void);		// Indicates that the init sequence was successful
 
 	int 			getPiRev		(void);
-	I2cMaster*		getI2cMaster	(char* busName = ""); 		// Bus numbers should be included between quotes
+	I2cMaster*		getI2cMaster	(const char* busName = ""); 		// Bus numbers should be included between quotes
 
 protected:
 	I2cMaster*		i2cMaster;
