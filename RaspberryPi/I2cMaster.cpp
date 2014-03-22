@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fcntl.h>
 
+#include "I2cMaster.h"
+
 using namespace std;
 
 /************************************************/
