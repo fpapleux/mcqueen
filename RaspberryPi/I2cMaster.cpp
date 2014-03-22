@@ -7,18 +7,15 @@
 
 #include <iostream>
 #include <fcntl.h>
-#include "I2cMaster.h"
 
 using namespace std;
 
 /************************************************/
-I2cMaster::I2cMaster (char* path)
+I2cMaster::I2cMaster (const char* path)
 {
-	int i;
 	fd = -1;
-	for (i = 0; i < 32; i++) slave[i] = 0;
 	ready = -1;
-	init(path);
+	init (path);
 }
 
 /************************************************/
@@ -28,7 +25,7 @@ I2cMaster::~I2cMaster (void)
 }
 
 /************************************************/
-void I2cMaster::init (char* address)
+void I2cMaster::init (const char* address)
 {
 	if ((fd = open(address, O_RDWR)) < 0) ready = -1; else ready = 1;
 }

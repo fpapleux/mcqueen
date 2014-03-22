@@ -28,26 +28,19 @@ public:
 	int		millis 		(void);
 
 	int		isReady		(void);		// Indicates that the init sequence was successful
-	int		isI2cReady	(void);	// Indicates whether or not the I2C bus was initialized.
 
-	int 	getPiRev	(void);
-	I2cMaster*		getI2cMaster	(char* busName = ""); // Bus numbers should be included between quotes
-
-	// DigitalPin*		getPin			(char* pinName = ""); // Pin numbers should be included between quotes
+	int 			getPiRev		(void);
+	I2cMaster*		getI2cMaster	(char* busName = ""); 		// Bus numbers should be included between quotes
 
 protected:
-	// DigitalPin**	digitalPins;
 	I2cMaster*		i2cMaster;
 
 private:
 	int 	ready;				// Indicates that the controller was initialized successfully
 	int 	piRev;				// Holds Pi board revision (0 for Rev.A, 1 for Rev.B)
-	int		i2cReady;
 	char*	i2cMasterPath;
-	int		i2cFd;
 
 	void	close				(void);
-	void	initDigitalPins		(void);
 	void	initI2cMaster		(void);
 
 };

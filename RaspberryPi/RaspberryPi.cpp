@@ -48,11 +48,6 @@ void RaspberryPi::init (void)
 }
 
 /********************************************************************/
-void RaspberryPi::initDigitalPins (void)
-{
-}
-
-/********************************************************************/
 void RaspberryPi::initI2cMaster(void)
 {
 	if (!ready) return;
@@ -61,21 +56,19 @@ void RaspberryPi::initI2cMaster(void)
 }
 
 /********************************************************************/
-void RaspberryPi::close(void) {
+void RaspberryPi::close(void)
+{
 }
 
 /******************************************************************/
-int RaspberryPi::isReady(void) {
+int RaspberryPi::isReady(void)
+{
 	return ready;
 }
 
 /******************************************************************/
-int RaspberryPi::isI2cReady(void) {
-	return i2cReady;
-}
-
-/******************************************************************/
-int RaspberryPi::getPiRev(void) {
+int RaspberryPi::getPiRev(void)
+{
 	// Need to figure out what different values are returned by piBoardRev
 	if (piRev == -1)
 		piRev = piBoardRev();
