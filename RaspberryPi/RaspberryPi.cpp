@@ -38,7 +38,6 @@ void RaspberryPi::init (void)
 	if (wiringPiSetup() != -1) ready = 1; else ready = -1;
 	if (ready) {
 		if (piRev == -1) piRev = piBoardRev();
-		initDigitalPins();
 		initI2cMaster();
 	}
 	else
