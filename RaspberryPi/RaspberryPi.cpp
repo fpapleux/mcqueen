@@ -56,8 +56,8 @@ void RaspberryPi::initDigitalPins (void)
 void RaspberryPi::initI2cMaster(void)
 {
 	if (!ready) return;
-	if (piBoardRev() == 1) i2cMasterPath = "/dev/i2c-0"; else i2cMasterPath = "/dev/i2c-1";
-	i2cMaster = new I2cMaster(&i2cMasterPath);
+	if (piBoardRev() == 1) i2cMasterPath = (char*) "/dev/i2c-0"; else i2cMasterPath = (char*) "/dev/i2c-1";
+	i2cMaster = new I2cMaster((char*)i2cMasterPath);
 }
 
 /********************************************************************/
