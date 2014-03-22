@@ -17,6 +17,7 @@ I2cMaster::I2cMaster (const char* path)
 {
 	fd = -1;
 	ready = -1;
+	for (int i = 0; i < 64; i++) i2cSlave[i] = -1;
 	init (path);
 }
 
@@ -35,6 +36,8 @@ void I2cMaster::init (const char* address)
 /************************************************/
 void I2cMaster::close (void)
 {
+	for (int i = 0; i < 64; i++)
+		if (i2cSlave[i] != -1) delete i2cSlave[i];
 }
 
 /************************************************/
@@ -43,5 +46,15 @@ int I2cMaster::isReady (void)
 	return ready;
 }
 
+/******************************************************************/
+I2cSlave* I2cMaster::addI2cSlave (const char* type, int address)
+{
+	if (i2cSlave[address]) delete i2cSlave[address];
+	switch (type) {
+		case "PCA9685":		i2cSlave[address] = new I2cSlave_PCA9685(address);
+							break;
+	}
+	return i2cSlave[address];
+}
 
 

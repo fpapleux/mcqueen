@@ -11,17 +11,17 @@
 class I2cSlave {
 
 public:
-	I2cSlave (char* initString);
-	virtual ~I2cSlave (void);
-	virtual void init (char* initString);
-	virtual void close (void);
-	virtual void write8 (int data);
-	virtual void write16 (int data);
-	virtual int read8 (void);
-	virtual int read16 (void);
+	I2cSlave (int addr);
+	~I2cSlave (void);
+	void init (int addr);
+	void close (void);
+	void write8 (int reg, int data);
+	void write16 (int reg, int data);
+	int read8 (int reg);
+	int read16 (int reg);
 
-private:
-
+protected:
+	int address;
 };
 
 #endif /* I2CSLAVE_H_ */

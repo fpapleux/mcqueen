@@ -8,19 +8,23 @@
 #ifndef I2CMASTER_H_
 #define I2CMASTER_H_
 
+#include "I2cSlave.h"
+
 class I2cMaster {
 
 public:
 	I2cMaster (const char* address);
 	~I2cMaster (void);
 
-	void 	init (const char* address);
-	void 	close (void);
-	int 	isReady (void);
+	void 		init 			(const char* address);
+	void 		close 			(void);
+	int 		isReady 		(void);
+	I2cSlave*	addI2cSlave		(const char* type, int address);
 
 private:
 	int ready;
 	int fd;
+	I2cSlave*		i2cSlave[64];
 };
 
 #endif /* I2CBUS_H_ */
