@@ -76,7 +76,7 @@ int RaspberryPi::getPiRev(void)
 }
 
 /******************************************************************/
-I2cMaster* RaspberryPi::getI2cMaster(char* busname)
+I2cMaster* RaspberryPi::getI2cMaster(const char* busname)
 {
 	return i2cMaster;
 }
