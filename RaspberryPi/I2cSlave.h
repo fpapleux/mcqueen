@@ -8,7 +8,8 @@
 #ifndef I2CSLAVE_H_
 #define I2CSLAVE_H_
 
-class I2cSlave {
+class I2cSlave
+{
 
 public:
 	I2cSlave (int addr);

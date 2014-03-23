@@ -12,6 +12,7 @@
 using namespace std;
 
 I2cSlave_PCA9685::I2cSlave_PCA9685 (int addr)
+: I2cSlave(addr)
 {
 	cout << "i2cSlave_PCA9685 constructor" << endl;
 }
