@@ -13,9 +13,9 @@
 class I2cSlave_PCA9685 : public I2cSlave
 {
 public:
-	I2cSlave_PCA9685 (int addr2);
+	I2cSlave_PCA9685 (int addr);
 	~I2cSlave_PCA9685 (void);
-	// void init (int address);
+	// void init (int addr);
 	// void close (void);
 	// void write8 (int reg, int data);
 	// void write16 (int reg, int data);

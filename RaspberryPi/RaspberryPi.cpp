@@ -5,9 +5,6 @@
  *      Author: fabien papleux
  */
 
-#ifndef RASPBERRYPI_CPP_
-#define RASPBERRYPI_CPP_
-
 #include <iostream>
 #include <sys/ioctl.h>
 #include <wiringPi.h>
@@ -80,6 +77,4 @@ I2cMaster* RaspberryPi::getI2cMaster (const char* busname)
 {
 	return i2cMaster;
 }
-
-#endif
 

@@ -26,9 +26,10 @@ public:
 	I2cSlave*	addI2cSlave		(int type, int address);
 
 private:
-	int ready;
-	int fd;
-	I2cSlave*		i2cSlave[64];
+	int 		ready;
+	int 		fd;
+	I2cSlave*	i2cSlave[64];
+
 };
 
 #endif /* I2CBUS_H_ */
