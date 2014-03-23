@@ -23,7 +23,7 @@ int main (int argv, char** args) {
 	if (! i2c->isReady()) { cout << "Raspberry Pi's I2C Master did not initialize" << endl; return 1; }
 	cout << "Raspberry Pi's I2C Master is ready" << endl;
 
-	I2cSlave_PCA9685* i2cSlave = i2c->addI2cSlave(I2C_PCA9685, 0x40);
+	I2cSlave_PCA9685* i2cSlave = (I2cSlave_PCA9685*) i2c->addI2cSlave(I2C_PCA9685, 0x40);
 	if (i2cSlave == NULL)  { cout << "PCA9685 did not initialize" << endl; return 1; }
 	cout << "PCA9685 connected." << endl;
 
