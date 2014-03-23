@@ -7,7 +7,7 @@ LDTRAIL=-lwiringPi
 all:			car
 
 car:			Car.o app.o
-	$(CC) $(LDFLAGS) car.o app.o -o car $(LDTRAIL)
+	$(CC) $(LDFLAGS) Car.o app.o -o car $(LDTRAIL)
 
 app.o: 		app.cpp
 	$(CC) $(CFLAGS) app.cpp $(CTRAIL)
