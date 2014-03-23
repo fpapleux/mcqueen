@@ -8,8 +8,10 @@
 #include <iostream>
 #include "Car.h"
 
+using namespace std;
+
 int main (int argv, char** args) {
-	Car car();
+	Car car;
 	if (car.isReady()) cout << "The car is ready" << endl;
 
 }
