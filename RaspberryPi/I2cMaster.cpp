@@ -60,4 +60,10 @@ I2cSlave* I2cMaster::addI2cSlave (int type, int address)
 	return i2cSlave[address];
 }
 
+/******************************************************************/
+I2cSlave* I2cMaster::getI2cSlave (int address)
+{
+	return i2cSlave[address];
+}
+
 

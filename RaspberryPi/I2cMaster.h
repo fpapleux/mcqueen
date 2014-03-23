@@ -24,6 +24,7 @@ public:
 	void 		close 			(void);
 	int 		isReady 		(void);
 	I2cSlave*	addI2cSlave		(int type, int address);
+	I2cSlave*	getI2cSlave		(int address);
 
 private:
 	int 		ready;
