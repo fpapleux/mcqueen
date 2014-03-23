@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include "I2cSlave.h"
 #include "I2cSlave_PCA9685.h"
 
 using namespace std;
