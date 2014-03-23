@@ -8,6 +8,8 @@
 #ifndef I2CSLAVE_H_
 #define I2CSLAVE_H_
 
+#include "I2cSlave_PCA9685.h"
+
 class I2cSlave {
 
 public:
