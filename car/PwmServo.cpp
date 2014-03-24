@@ -1,38 +1,38 @@
 /*
- * Car.cpp
+ * PwmServo.cpp
  *
  *  Created on: Mar 23, 2014
  *      Author: fabien papleux
  */
 
 #include <iostream>
-#include "Car.h"
 #include "PwmServo.h"
 
+using namespace std;
+
 /****************************************************************/
-Car::Car(void)
+PwmServo::PwmServo (PwmServoConfig *config)
 {
-	servo = NULL;
+	frequency = BASE_FREQUENCY;
+	resolution = BASE_RESOLUTION;
+	cfg = config;
+	cout << "Base frequency recorded as: " << cfg->baseFrequency << endl;
 	ready = -1;
 	reset();
 }
 
 /****************************************************************/
-Car::~Car(void)
+PwmServo::~PwmServo(void)
 {
 }
 
 /****************************************************************/
-void Car::reset(void)
+void PwmServo::reset(void)
 {
-	servo = new PwmServo(&servoConfig);
 	ready = 1;
 }
 
 /****************************************************************/
-int Car::isReady () { return ready; }
-/****************************************************************/
-PwmServo* Car::getServo () { return servo; }
-
+int PwmServo::isReady(void) { return ready; }
 
 
