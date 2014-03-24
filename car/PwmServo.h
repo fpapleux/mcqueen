@@ -20,14 +20,15 @@
  * size of your frame, which would be 4096 / 20 = 205.
  */
 
+#define	BASE_OSCCLOCK		25000000
 #define	BASE_FREQUENCY		50
 #define BASE_RESOLUTION		4096
 
 struct PwmServoConfig {
-	int baseFrequency;
-	int baseResolution;
-	int posIdle;
-	int posMinLeft;
+	int frequency;		// in Hz
+	int resolution;		// resolution of the PWM value (PCA9685 is a 12-bit resolution so values should range from 0 to 4095, which means the value here should be 4096)
+	int posIdle;		// value for idle position
+	int posMinLeft;		// in principle, this will be idle+-1.  For ESC's, which use the same technology, there could be a difference between purely idle and the beginning of movement
 	int posMaxLeft;
 	int posMinRight;
 	int posMaxRight;
@@ -41,15 +42,17 @@ public:
 	void reset (void);
 	int isReady (void);
 
+	int setFrequency (int freq);			// Calling this function triggers a reset of the device
+	int setResolution (int resolution);		// Calling this function triggers a reset of the device
+
 	// int leftPct (int percent);
 	// int rightPct (int percent);
 	// int straight (void);
 
 private:
 	int ready;
-	int frequency;
-	int resolution;
-	PwmServoConfig* cfg;
+	PwmServoConfig cfg;				// actual configuration used to manipulate the servo
+	PwmServoConfig* baseConfig;		// config provided by user at initialization to be used as base during operation
 };
 
 #endif /* PWMSERVO_H_ */
