@@ -45,6 +45,4 @@ private:
 	//static MicroController mc();
 };
 
-PwmController Car::pwm = PwmController();
-
 #endif /* CAR_H_ */

@@ -25,6 +25,7 @@ PwmServoConfig servoConfig = {
 	215			// posMaxRight
 };
 
+PwmController Car::pwm = PwmController();
 
 /****************************************************************/
 Car::Car(void)
