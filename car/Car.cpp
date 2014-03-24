@@ -6,8 +6,20 @@
  */
 
 #include <iostream>
-#include "Car.h"
 #include "PwmServo.h"
+#include "Car.h"
+
+// This is the base configuration used for the servo in the car. Adjust as necessary.
+PwmServoConfig servoConfig = {
+	50, 		// Hz - baseFrequency
+	4096,		// 12-bits - baseResolution
+	330,		// posIdle
+	331,		// posMinLeft
+	460,		// posMaxLeft
+	329,		// posMinRight
+	215			// posMaxRight
+};
+
 
 /****************************************************************/
 Car::Car(void)
