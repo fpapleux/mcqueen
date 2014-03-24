@@ -41,7 +41,7 @@ public:
 private:
 	int 			ready;
 	PwmServo*		servo;						// points to the servo motor of the car
-	static PwmController pwm();
+	static PwmController pwm;
 	//static MicroController mc();
 };
 
