@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>
 #include "PwmController.h"
 #include "PwmServo.h"
 
