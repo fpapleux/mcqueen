@@ -33,4 +33,34 @@ int PwmController::init (void)							// initializes the controller
 int PwmController::isReady (void) { return ready; }
 
 
+/********************************************************/
+int PwmController::getPwmFrequency (void)
+{
+	return 1;
+}
+
+/********************************************************/
+int PwmController::getPwmResolution (void)
+{
+	return 1;
+}
+
+/********************************************************/
+int PwmController::setPwm (int address, int data)
+{
+	return 1;
+}
+
+/********************************************************/
+int PwmController::getPwm (int address)
+{
+	return 1;
+}
+
+/********************************************************/
+int PwmController::printStatus (void)
+{
+	return 1;
+}
+
 
