@@ -43,7 +43,7 @@ Car::~Car(void)
 /****************************************************************/
 void Car::init(void)
 {
-	servo = new PwmServo(&servoConfig);
+	servo = new PwmServo(&servoConfig, &pwm);
 	ready = 1;
 }
 
