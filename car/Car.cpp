@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include "PwmController.h"
 #include "PwmServo.h"
 #include "Car.h"
 
@@ -13,6 +14,7 @@ using namespace std;
 
 // This is the base configuration used for the servo in the car. Adjust as necessary.
 PwmServoConfig servoConfig = {
+	8,			// Address to be used by this servo to send commands through the PWM controller
 	50, 		// Hz - baseFrequency
 	4096,		// 12-bits - baseResolution
 	330,		// posInit
@@ -29,7 +31,7 @@ Car::Car(void)
 {
 	servo = NULL;
 	ready = -1;
-	reset();
+	init();
 }
 
 /****************************************************************/
@@ -39,7 +41,7 @@ Car::~Car(void)
 }
 
 /****************************************************************/
-void Car::reset(void)
+void Car::init(void)
 {
 	servo = new PwmServo(&servoConfig);
 	ready = 1;

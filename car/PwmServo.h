@@ -20,11 +20,8 @@
  * size of your frame, which would be 4096 / 20 = 205.
  */
 
-#define	BASE_OSCCLOCK		25000000
-#define	BASE_FREQUENCY		50
-#define BASE_RESOLUTION		4096
-
 struct PwmServoConfig {
+	int address;		// indicate what is the address this Servo should provide the PWM controller to send information
 	int frequency;		// in Hz
 	int resolution;		// resolution of the PWM value (PCA9685 is a 12-bit resolution so values should range from 0 to 4095, which means the value here should be 4096)
 	int posInit;		// position to initialize the servo at.
@@ -38,27 +35,37 @@ struct PwmServoConfig {
 class PwmServo
 {
 public:
-	PwmServo (PwmServoConfig* config);
+	PwmServo (PwmServoConfig* config, PwmController* controller);
 	~PwmServo (void);
 
-	void	reset (void);
+	int		init (void);
 	int		isReady (void);
 	void	printStatus(void);
 
-	void	setFrequency (int freq);			// Calling this function triggers a reset of the device
-	void	setResolution (int resolution);		// Calling this function triggers a reset of the device
-	// int leftPct (int percent);
-	// int rightPct (int percent);
-	// int straight (void);
+	/*** Need a PWM controller class where to send the following commands:
+	 *
+	 * int init (void)							// resets controller
+	 * int isReady (void)						// returns 1 if controller is ready
+	 * int getPwmFrequency (void)				// Returns the current frequency
+	 * int getPwmResolution (void)				// Returns the current resolution used by the PWM controller
+	 * int setPwm (int address, int data)		// Sets the start & stop PWM value for me (still figure out meRef)
+	 * int getPwm (int address)					// Gets the stop value of the PWM
+	 * int printStatus (void)					// Sends detailed status of the controller to the screen
+	 *
+	 */
 
-	// int CurrentPosPct (void);
-	// int CurrentPosValue (void);
+	int leftPct (int percent);
+	int rightPct (int percent);
+	int straight (void);
+	int setPwm (int value);
+	int getPwm (void);
 
 private:
 	int ready;
 	int currentPos;					// Holds the current position
 	PwmServoConfig cfg;				// actual configuration used to manipulate the servo
 	PwmServoConfig* baseConfig;		// config provided by user at initialization to be used as base during operation
+	PwmController* pwm;				// pointer to a PWM controller, the address of which should be provided at creation time
 };
 
 #endif /* PWMSERVO_H_ */
