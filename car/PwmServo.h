@@ -27,7 +27,8 @@
 struct PwmServoConfig {
 	int frequency;		// in Hz
 	int resolution;		// resolution of the PWM value (PCA9685 is a 12-bit resolution so values should range from 0 to 4095, which means the value here should be 4096)
-	int posIdle;		// value for idle position
+	int posInit;		// position to initialize the servo at.
+	int posStraight;	// value for straight position
 	int posMinLeft;		// in principle, this will be idle+-1.  For ESC's, which use the same technology, there could be a difference between purely idle and the beginning of movement
 	int posMaxLeft;
 	int posMinRight;
@@ -39,18 +40,23 @@ class PwmServo
 public:
 	PwmServo (PwmServoConfig* config);
 	~PwmServo (void);
-	void reset (void);
-	int isReady (void);
 
-	int setFrequency (int freq);			// Calling this function triggers a reset of the device
-	int setResolution (int resolution);		// Calling this function triggers a reset of the device
+	void	reset (void);
+	int		isReady (void);
+	void	printStatus(void);
 
+	void	setFrequency (int freq);			// Calling this function triggers a reset of the device
+	void	setResolution (int resolution);		// Calling this function triggers a reset of the device
 	// int leftPct (int percent);
 	// int rightPct (int percent);
 	// int straight (void);
 
+	// int CurrentPosPct (void);
+	// int CurrentPosValue (void);
+
 private:
 	int ready;
+	int currentPos;					// Holds the current position
 	PwmServoConfig cfg;				// actual configuration used to manipulate the servo
 	PwmServoConfig* baseConfig;		// config provided by user at initialization to be used as base during operation
 };

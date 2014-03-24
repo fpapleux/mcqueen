@@ -12,7 +12,9 @@ using namespace std;
 
 int main (int argv, char** args) {
 	Car car;
-	if (car.isReady()) cout << "The car is ready" << endl;
+	if (car.isReady()) {
+		car.printStatus();
+	}
 
 }
 

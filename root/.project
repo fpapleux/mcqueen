@@ -36,6 +36,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/makefile</locationURI>
 		</link>
 		<link>
+			<name>wiringPi</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/wiringPi</locationURI>
+		</link>
+		<link>
 			<name>gpio/gpio.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/gpio/gpio.cpp</locationURI>

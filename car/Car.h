@@ -17,6 +17,7 @@ public:
 	Car (void);
 	~Car (void);
 	void reset (void);			// initializes the car system, puts all systems in neutral and ready to begin operating (isReady)
+	void printStatus (void);	// prints full status of the car
 
 	// managing direction .. returns 1 for success
 	//int 	rightPct (int percent);
@@ -37,8 +38,10 @@ public:
 	//int 	getCurrentSpeedPct (void);		// returns current speed in % (backward is negative. idle is 0. forward is positive)
 
 private:
-	int 		ready;
-	PwmServo*	servo;						// points to the servo motor of the car
+	int 			ready;
+	PwmServo*		servo;						// points to the servo motor of the car
+	I2cSlave*		pca9685;					// i2c controller holding the i2c connection to our PWM servo
+
 };
 
 #endif /* CAR_H_ */

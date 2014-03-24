@@ -9,11 +9,14 @@
 #include "PwmServo.h"
 #include "Car.h"
 
+using namespace std;
+
 // This is the base configuration used for the servo in the car. Adjust as necessary.
 PwmServoConfig servoConfig = {
 	50, 		// Hz - baseFrequency
 	4096,		// 12-bits - baseResolution
-	330,		// posIdle
+	330,		// posInit
+	330,		// posStraight
 	331,		// posMinLeft
 	460,		// posMaxLeft
 	329,		// posMinRight
@@ -44,8 +47,17 @@ void Car::reset(void)
 
 /****************************************************************/
 int Car::isReady () { return ready; }
+
 /****************************************************************/
 PwmServo* Car::getServo () { return servo; }
 
-
+/****************************************************************/
+void Car::printStatus (void)
+{
+	cout << "CAR DETAILED STATUS" << endl;
+	cout << "-------------------" << endl << endl;
+	cout << "Is Ready   :  " << (ready ? "Yes" : "No") << endl;
+	cout << endl;
+	servo->printStatus();
+}
 
