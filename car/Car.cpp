@@ -27,7 +27,7 @@ PwmServoConfig servoConfig = {
 
 
 /****************************************************************/
-Car::Car(void)
+Car::Car(void) : pwm()
 {
 	servo = NULL;
 	ready = -1;
