@@ -8,6 +8,8 @@
 #ifndef PWMSERVO_H_
 #define PWMSERVO_H_
 
+#include "PwmController.h"
+
 // Update these depending on servo use
 
 /* 50Hz is the typical clock for servos. it means the controller runs 50 cycles in 1 second,
