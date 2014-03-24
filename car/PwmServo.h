@@ -36,7 +36,7 @@ struct PwmServoConfig {
 class PwmServo
 {
 public:
-	PwmServo (PwmServoConfig *config);
+	PwmServo (PwmServoConfig* config);
 	~PwmServo (void);
 	void reset (void);
 	int isReady (void);

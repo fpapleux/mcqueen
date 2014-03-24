@@ -11,7 +11,7 @@
 using namespace std;
 
 /****************************************************************/
-PwmServo::PwmServo (PwmServoConfig *config)
+PwmServo::PwmServo (PwmServoConfig* config)
 {
 	frequency = BASE_FREQUENCY;
 	resolution = BASE_RESOLUTION;
