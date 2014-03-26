@@ -16,13 +16,14 @@ int main (int argv, char** args) {
 	if (car.isReady()) {
 		car.printStatus();
 		for (int i = 0; i < 10; i++) {
-			car.left(80);
+			car.leftPct(80);
 			delay(200);
 			car.straight();
 			delay(200);
-			car.right(80);
+			car.rightPct(80);
 			delay(200)
 			car.straight();
+		}
 	}
 
 }
