@@ -80,19 +80,19 @@ int I2cBus::read16 (int address, int reg)
 /**********************************************************/
 void I2cBus::write8 (int address, int reg, int data)
 {
-	if (! ready) return -1;
-	if (fd < 0) return -1;
+	if (! ready) return;
+	if (fd < 0) return;
 	if (address != currentSlave) setSlave(address);
-	return wiringPiI2CWriteReg8 (fd, reg, data);
+	wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/
 void I2cBus::write16 (int address, int reg, int data)
 {
-	if (! ready) return -1;
-	if (fd < 0) return -1;
+	if (! ready) return;
+	if (fd < 0) return;
 	if (address != currentSlave) setSlave(address);
-	return wiringPiI2CWriteReg8 (fd, reg, data);
+	wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/
