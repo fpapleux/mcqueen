@@ -48,10 +48,9 @@ int PwmServo::init(void)
 	cfg.posMinRight = (int) baseConfig->posMinRight * resolutionFactor * frameSizeFactor;
 	cfg.posMaxRight = (int) baseConfig->posMaxRight * resolutionFactor * frameSizeFactor;
 
-	if (pwm->setPwm(cfg.address, cfg.posInit)) {
-		currentPos = cfg.posInit;
-		ready = 1;
-	}
+	pwm->setPwm(cfg.address, cfg.posInit);
+	currentPos = cfg.posInit;
+	ready = 1;
 	return ready;
 }
 
