@@ -23,6 +23,7 @@ int main (int argv, char** args) {
 			car.rightPct(80);
 			delay(1000);
 			car.straight();
+			delay(1000);
 		}
 	}
 
