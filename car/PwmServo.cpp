@@ -101,8 +101,9 @@ int PwmServo::setPwm (int value)
 int PwmServo::leftPct (int percent)
 {
 	int value;
+	int pctValue = (abs(cfg.posMaxLeft - cfg.posMinLeft) / 100) * percent;
 	if (percent == 0) value = cfg.posStraight;
-	else value = (int) ((abs(cfg.posMaxLeft - cfg.posMinLeft) / 100) * percent) + fmin(cfg.posMinLeft, cfg.posMaxLeft);
+	else value = (fmin(cfg.posMinLeft, cfg.posMaxLeft) == cfg.posMinLeft ? cfg.posMinLeft + pctValue : cfg.posMaxLeft - pctValue);
 	cout << "Moving to position left " << percent << "% with value " << value << " based on min " << cfg.posMinLeft << " and max " << cfg.posMaxLeft << endl;
 	if (ready && pwm->isReady()) {
 		pwm->setPwm(cfg.channel, value);
@@ -115,8 +116,9 @@ int PwmServo::leftPct (int percent)
 int PwmServo::rightPct (int percent)
 {
 	int value;
+	int pctValue = (abs(cfg.posMaxRight - cfg.posMinRight) / 100) * percent;
 	if (percent == 0) value = cfg.posStraight;
-	else value = (int) ((abs(cfg.posMaxRight - cfg.posMinRight) / 100) * percent) + fmin(cfg.posMinRight, cfg.posMaxRight);
+	else value = (fmin(cfg.posMinRight, cfg.posMaxRight) == cfg.posMinRight ? cfg.posMinRight + pctValue : cfg.posMaxRight - pctValue);
 	cout << "Moving to position right " << percent << "% with value " << value << " based on min " << cfg.posMinRight << " and max " << cfg.posMaxRight << endl;
 	if (ready && pwm->isReady()) {
 		pwm->setPwm(cfg.channel, value);
