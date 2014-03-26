@@ -9,6 +9,7 @@
 #define CAR_H_
 
 #include "PwmServo.h"
+#include "PwmEsc.h"
 #include "PCA9685.h"
 #include "I2cBus.h"
 #include "RaspberryPi.h"
@@ -30,9 +31,10 @@ public:
 	int 	straight (void);
 
 	// managing throttle
-	//int 	forwardPct (int percent);
-	//int 	backwardPct (int percent);
-	//int 	stop (void);
+	int 	forwardPct (int percent);
+	int 	backwardPct (int percent);
+	int		speedPct (int percent);			// ranges from -100% for full backward to +100% for full forward.
+	int 	stop (void);
 
 	// car state information
 	int 	isReady (void);					// Car initialization was successful
@@ -40,6 +42,7 @@ public:
 	//int 	isIdle (void);					// throttle is zero and wheels are not moving
 
 	PwmServo	*getServo (void);			// returns a pointer to the servo for querying
+	PwmEsc		*getEsc (void);				// returns a pointer to the esc
 	PCA9685		*getPCA9685 (void);		 	// returns a pointer to the PwmController
 	I2cBus		*getI2cBus (void);			// returns a pointer to the I2cBus object
 	RaspberryPi	*getRaspberryPi (void);		// returns a pointer to the Raspberry Pi
@@ -51,6 +54,8 @@ private:
 	int 			ready;
 	PwmServoConfig	servoConfig;
 	PwmServo		*servo;						// points to the servo motor of the car
+	PwmEscConfig	escConfig;
+	PwmEsc			*esc;
 	PCA9685			*pwm;
 	I2cBus			*i2c;
 	RaspberryPi		*pi;

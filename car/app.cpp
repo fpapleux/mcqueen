@@ -16,9 +16,12 @@ int main (int argv, char** args) {
 	Car car;
 	if (car.isReady()) {
 		car.printStatus();
+		car.stop();
 		for (int i = 0; i < 5; i++) {
+			car.speedPct(i * 10);
 			for (b = -100; b < 100; b++) {
 				car.turnPct(b);
+
 				delay(5);
 			}
 			for (b = 100; b > -100; b--) {
