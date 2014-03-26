@@ -79,47 +79,47 @@ void PwmServo::printStatus (void)
 /****************************************************************/
 int PwmServo::straight (void)
 {
-	int result = -1;
-	if (ready && pwm->isReady())
-		result = pwm->setPwm(cfg.address, cfg.posStraight);
-	if (result) currentPos = cfg.posStraight;
-	return result;
+	if (ready && pwm->isReady()) {
+		pwm->setPwm(cfg.address, cfg.posStraight);
+		currentPos = cfg.posStraight;
+	}
+	return 1;
 }
 
 /****************************************************************/
 int PwmServo::setPwm (int value)
 {
-	int result = -1;
-	if (ready && pwm->isReady())
+	if (ready && pwm->isReady()) {
 		result = pwm->setPwm(cfg.address, value);
-	if (result) currentPos = value;
-	return result;
+		currentPos = value;
+	}
+	return 1;
 }
 
 /****************************************************************/
 int PwmServo::leftPct (int percent)
 {
-	int result = -1;
 	int value;
 	if (percent == 0) value = cfg.posStraight;
 	else value = (int) ((abs(cfg.posMaxLeft - cfg.posMinLeft) / 100) * percent) + fmin(cfg.posMinLeft, cfg.posMaxLeft);
-	if (ready && pwm->isReady())
-		result = pwm->setPwm(cfg.address, value);
-	if (result) currentPos = value;
-	return result;
+	if (ready && pwm->isReady()) {
+		pwm->setPwm(cfg.address, value);
+		currentPos = value;
+	}
+	return 1;
 }
 
 /****************************************************************/
 int PwmServo::rightPct (int percent)
 {
-	int result = -1;
 	int value;
 	if (percent == 0) value = cfg.posStraight;
 	else value = (int) ((abs(cfg.posMaxRight - cfg.posMinRight) / 100) * percent) + fmin(cfg.posMinRight, cfg.posMaxRight);
-	if (ready && pwm->isReady())
-		result = pwm->setPwm(cfg.address, value);
-	if (result) currentPos = value;
-	return result;
+	if (ready && pwm->isReady()) {
+		pwm->setPwm(cfg.address, value);
+		currentPos = value;
+	}
+	return 1;
 }
 
 
