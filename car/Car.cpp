@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "PwmServo.h"
 #include "PCA9685.h"
 #include "I2cBus.h"
@@ -74,13 +74,14 @@ RaspberryPi *Car::getRaspberryPi (void) { return pi; }
 /****************************************************************/
 void Car::printStatus (void)
 {
+	string out;
 	cout << "CAR DETAILED STATUS" << endl;
 	cout << "-------------------" << endl << endl;
 	cout << "Is Ready              : " << (ready ? "Yes" : "No") << endl;
-	cout << "Raspberry Pi          : " << (pi != NULL    ? "Present" << (pi->isReady()    ? " and Ready" : " but not ready") : "Absent") << endl;
-	cout << "Pi I2C Bus            : " << (i2c != NULL   ? "Present" << (i2c->isReady()   ? " and Ready" : " but not ready") : "Absent") << endl;
-	cout << "PCA9685 (PWM)         : " << (pwm != NULL   ? "Present" << (pwm->isReady()   ? " and Ready" : " but not ready") : "Absent") << endl;
-	cout << "Servo (direction)     : " << (servo != NULL ? "Present" << (servo->isReady() ? " and Ready" : " but not ready") : "Absent") << endl;
+	cout << "Raspberry Pi          : " << (pi    ? string("Present").append((pi->isReady()    ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "Pi I2C Bus            : " << (i2c   ? string("Present").append((i2c->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "PCA9685 (PWM)         : " << (pwm   ? string("Present").append((pwm->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "Servo (direction)     : " << (servo ? string("Present").append((servo->isReady() ? " and Ready" : " but not ready")) : "Absent") << endl;
 	cout << endl;
 	pi->printStatus();
 	pwm->printStatus();
