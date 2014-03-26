@@ -21,7 +21,7 @@ int main (int argv, char** args) {
 			car.straight();
 			delay(200);
 			car.rightPct(80);
-			delay(200)
+			delay(200);
 			car.straight();
 		}
 	}
