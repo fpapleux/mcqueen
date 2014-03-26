@@ -90,7 +90,7 @@ int PwmServo::straight (void)
 int PwmServo::setPwm (int value)
 {
 	if (ready && pwm->isReady()) {
-		result = pwm->setPwm(cfg.address, value);
+		pwm->setPwm(cfg.address, value);
 		currentPos = value;
 	}
 	return 1;
