@@ -19,11 +19,11 @@ int main (int argv, char** args) {
 		for (int i = 0; i < 5; i++) {
 			for (b = -100; b < 100; b++) {
 				car.turnPct(b);
-				delay(50);
+				delay(10);
 			}
 			for (b = 100; b > -100; b--) {
 				car.turnPct(b);
-				delay(50);
+				delay(10);
 			}
 		}
 	}

@@ -91,13 +91,13 @@ void Car::printStatus (void)
 }
 
 /****************************************************************/
-int	Car::rightPct (int percent)
+int	Car::turnRightPct (int percent)
 {
 	return servo->rightPct(percent);
 }
 
 /****************************************************************/
-int	Car::leftPct (int percent)
+int	Car::turnLeftPct (int percent)
 {
 	return servo->leftPct(percent);
 }
@@ -112,4 +112,10 @@ int	Car::straight (void)
 int	Car::turnPct (int percent)
 {
 	return servo->turnPct(percent);
+}
+
+/****************************************************************/
+int	Car::turn (int pwmValue)
+{
+	return servo->setPwm(pwmValue);
 }
