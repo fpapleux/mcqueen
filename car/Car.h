@@ -11,6 +11,7 @@
 #include "PwmServo.h"
 #include "PCA9685.h"
 #include "I2cBus.h"
+#include "RaspberryPi.h"
 
 class Car
 {
