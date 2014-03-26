@@ -8,7 +8,7 @@
 #ifndef PWMSERVO_H_
 #define PWMSERVO_H_
 
-#include "PwmController.h"
+#include "PCA9685.h"
 
 /*** This class requires a PWM controller class where to send the following commands:
  *
