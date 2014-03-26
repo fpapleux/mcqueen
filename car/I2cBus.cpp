@@ -86,8 +86,8 @@ int I2cBus::read16 (int address, int reg)
 int I2cBus::write8 (int address, int reg, int data)
 {
 	cout << "Write8 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
-	if (! ready) return;
-	if (fd < 0) return;
+	if (! ready) return -1;
+	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
 	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
@@ -96,8 +96,8 @@ int I2cBus::write8 (int address, int reg, int data)
 int I2cBus::write16 (int address, int reg, int data)
 {
 	cout << "Write16 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
-	if (! ready) return;
-	if (fd < 0) return;
+	if (! ready) return -1;
+	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
 	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
