@@ -21,7 +21,7 @@ I2cBus::I2cBus()
 {
 	currentSlave = -1;
 	fd = -1;
-	ready = -1;
+	ready = 0;
 	init();
 }
 
@@ -34,7 +34,7 @@ I2cBus::~I2cBus()
 /**********************************************************/
 int I2cBus::init(void)
 {
-	ready = -1;
+	ready = 0;
 	if (piBoardRev() == 1) i2cPath = "/dev/i2c-0";
 	else i2cPath = "/dev/i2c-1";
 	if ((fd = open (i2cPath, O_RDWR)) >= 0)
@@ -47,7 +47,7 @@ void I2cBus::setSlave (int address)
 {
 	// cout << "Setting new slave as 0x" << hex << address << dec << endl;
 	if (! ready) return;
-	if (! fd) return;
+	if (fd < 0) return;
 	if (ioctl (fd, I2C_SLAVE, address) >= 0)
 		currentSlave = address;
 }

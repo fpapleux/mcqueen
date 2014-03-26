@@ -22,7 +22,7 @@ Car::Car(void)
 	i2c = NULL;
 	pwm = NULL;
 	servo = NULL;
-	ready = -1;
+	ready = 0;
 	init();
 }
 
@@ -37,16 +37,18 @@ Car::~Car(void)
 /****************************************************************/
 void Car::init(void)
 {
-	ready = -1;
-	servoConfig.channel = 8;
-	servoConfig.frequency = 50;
-	servoConfig.resolution = 4096;
-	servoConfig.posInit = 330;
+	ready = 0;
+
+	servoConfig.channel 	= 8;
+	servoConfig.frequency 	= 50;
+	servoConfig.resolution 	= 4096;
+	servoConfig.posInit 	= 330;
 	servoConfig.posStraight = 330;
-	servoConfig.posMinLeft = 331;
-	servoConfig.posMaxLeft = 460;
+	servoConfig.posMinLeft 	= 331;
+	servoConfig.posMaxLeft 	= 460;
 	servoConfig.posMinRight = 329;
 	servoConfig.posMaxRight = 215;
+
 	pi = new RaspberryPi();
 	if (pi && pi->isReady()) {
 		i2c = pi->getI2cBus();
@@ -106,3 +108,8 @@ int	Car::straight (void)
 	return servo->straight();
 }
 
+/****************************************************************/
+int	Car::turnPct (int percent)
+{
+	return servo->turnPct(percent);
+}

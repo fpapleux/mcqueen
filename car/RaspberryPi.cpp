@@ -15,7 +15,7 @@ using namespace std;
 
 RaspberryPi::RaspberryPi (void)
 {
-	ready = -1;
+	ready = 0;
 	i2c = NULL;
 	if (initPi()) {
 		initI2cBus();
@@ -41,7 +41,7 @@ int RaspberryPi::isReady (void)
 int RaspberryPi::initPi (void)
 {
 	if (wiringPiSetup() != -1) return 1;
-	else return -1;
+	else return 0;
 }
 
 int RaspberryPi::initI2cBus (void)

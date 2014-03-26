@@ -57,6 +57,8 @@ public:
 	int leftPct (int percent);
 	int rightPct (int percent);
 	int straight (void);
+	int turnPct (int percent);	// going from -100% (full left) to +100% (full right) -- 0 being the straight/middle point
+
 	int setPwm (int value);
 	int getPwm (void);
 

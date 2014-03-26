@@ -25,6 +25,7 @@ public:
 	// managing direction
 	int 	rightPct (int percent);
 	int 	leftPct (int percent);
+	int		turnPct (int percent);
 	int 	straight (void);
 
 	// managing throttle

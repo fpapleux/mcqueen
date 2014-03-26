@@ -54,7 +54,7 @@ public:
 	I2cBus *getI2cBus (void);					// Returns a pointer to the i2cBus object in use
 	int getResolution (void);					// Returns the resolution of the PWM (12-bit for the PCA9685, which is 4096)
 
-	void setPwm (int channel, int data);		// Sets the start & stop PWM value for me (still figure out meRef)
+	int setPwm (int channel, int data);		// Sets the start & stop PWM value for me (still figure out meRef)
 	void setAddress (int address);
 	void setFrequency (int frequency);
 	void setI2cBus (I2cBus *i2c);

@@ -132,9 +132,9 @@ int PCA9685::getResolution (void)
 }
 
 /********************************************************/
-void PCA9685::setPwm (int channel, int data)
+int PCA9685::setPwm (int channel, int data)
 {
-	if (! i2c) return;
+	if (! i2c) return -1;
 	int regLo = data & 0x00ff;
 	int regHi = data >> 8;
 	int reg = (channel * 4) + 6;
@@ -143,6 +143,7 @@ void PCA9685::setPwm (int channel, int data)
 	i2c->write8 (address, reg + 1, 0x00);
 	i2c->write8 (address, reg + 2, regLo);
 	i2c->write8 (address, reg + 3, regHi);
+	return 1;
 }
 
 /********************************************************/
@@ -178,7 +179,7 @@ void PCA9685::setI2cBus (I2cBus *i2cBus)
 /********************************************************/
 int PCA9685::init (I2cBus *i2cBus, int addr, int freq, int res, int clock)
 {
-	ready = -1;
+	ready = 0;
 	i2c = i2cBus;
 	address = addr;
 	resolution = res;

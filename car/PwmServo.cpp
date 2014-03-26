@@ -16,6 +16,7 @@ using namespace std;
 /****************************************************************/
 PwmServo::PwmServo (PwmServoConfig* config, PCA9685* controller)
 {
+	ready = 0;
 	baseConfig = config;
 	currentPos = -1;
 	pwm = controller;
@@ -30,7 +31,7 @@ PwmServo::~PwmServo(void)
 /****************************************************************/
 int PwmServo::init(void)
 {
-	ready = -1;
+	ready = 0;
 	if (! pwm->isReady()) pwm->reset();
 	if (! pwm->isReady()) {
 		cout << "PWM Controller could not be initialized." << endl;
@@ -78,21 +79,21 @@ void PwmServo::printStatus (void)
 
 
 /****************************************************************/
-int PwmServo::straight (void)
-{
-	if (ready && pwm->isReady()) {
-		pwm->setPwm(cfg.channel, cfg.posStraight);
-		currentPos = cfg.posStraight;
-	}
-	return 1;
-}
-
-/****************************************************************/
 int PwmServo::setPwm (int value)
 {
 	if (ready && pwm->isReady()) {
 		pwm->setPwm(cfg.channel, value);
 		currentPos = value;
+	}
+	return 1;
+}
+
+/****************************************************************/
+int PwmServo::straight (void)
+{
+	if (ready && pwm->isReady()) {
+		pwm->setPwm(cfg.channel, cfg.posStraight);
+		currentPos = cfg.posStraight;
 	}
 	return 1;
 }
@@ -127,6 +128,14 @@ int PwmServo::rightPct (int percent)
 	return 1;
 }
 
+
+/****************************************************************/
+int PwmServo::turnPct (int percent)
+{
+	if (! percent) return straight();
+	else if (percent < 0) return leftPct(percent);
+	else return rightPct (percent);
+}
 
 /****************************************************************/
 int PwmServo::getPwm (void)

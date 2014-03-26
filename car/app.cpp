@@ -12,18 +12,19 @@
 using namespace std;
 
 int main (int argv, char** args) {
+	int b;
 	Car car;
 	if (car.isReady()) {
 		car.printStatus();
-		for (int i = 0; i < 10; i++) {
-			car.leftPct(80);
-			delay(1000);
-			car.straight();
-			delay(1000);
-			car.rightPct(80);
-			delay(1000);
-			car.straight();
-			delay(1000);
+		for (int i = 0; i < 5; i++) {
+			for (b = -100; b < 100; b++) {
+				car.turnPct(b);
+				delay(50);
+			}
+			for (b = 100; b > -100; b--) {
+				car.turnPct(b);
+				delay(50);
+			}
 		}
 	}
 
