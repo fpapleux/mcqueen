@@ -9,6 +9,8 @@
 #define CAR_H_
 
 #include "PwmServo.h"
+#include "PCA9685.h"
+#include "I2cBus.h"
 
 class Car
 {
@@ -34,14 +36,19 @@ public:
 	//int 	isMoving (void);				// throttle is non-zero
 	//int 	isIdle (void);					// throttle is zero and wheels are not moving
 
-	PwmServo*	getServo();					// returns a pointer to the servo for querying
+	PwmServo*		getServo (void);			// returns a pointer to the servo for querying
+	PCA9685*		getPCA9685 (void);		 	// returns a pointer to the PwmController
+	I2cBus*			getI2cBus (void);			// returns a pointer to the I2cBus object
+
 	//int 	getCurrentDirectionPct (void);	// returns current % turn (left is negative. idle is 0. right is positive)
 	//int 	getCurrentSpeedPct (void);		// returns current speed in % (backward is negative. idle is 0. forward is positive)
 
 private:
 	int 			ready;
-	PwmServo*		servo;						// points to the servo motor of the car
-	static PwmController pwm;
+	PwmServoConfig	servoConfig;
+	PwmServo		*servo;						// points to the servo motor of the car
+	PCA9685			*pwm;
+	I2cBus			*i2c;
 	//static MicroController mc();
 };
 

@@ -33,9 +33,11 @@ class Pca9685
 	public:
 		Pca9685 (void);
 		~Pca9685 (void);
+
 		int init();
 		int init(int newAddr);
 		int init(int newAddr, int newFrequency);
+
 		int setPwmFrequency(int newFrequency);
 		void setAddress (int newAddr);
 		int sleep();

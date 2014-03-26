@@ -6,8 +6,8 @@ LDTRAIL=-lwiringPi
 
 all:			car
 
-car:				PwmController.o PwmServo.o Car.o app.o
-	$(CC) $(LDFLAGS) PwmController.o PwmServo.o Car.o app.o -o car $(LDTRAIL)
+car:				I2cBus.o PCA9685.o PwmServo.o Car.o app.o
+	$(CC) $(LDFLAGS) I2cBus.o PCA9685.o PwmServo.o Car.o app.o -o car $(LDTRAIL)
 
 app.o: 				app.cpp
 	$(CC) $(CFLAGS) app.cpp $(CTRAIL)
@@ -18,5 +18,9 @@ Car.o:				Car.cpp
 PwmServo.o:			PwmServo.cpp
 	$(CC) $(CFLAGS) PwmServo.cpp $(CTRAIL)
 
-PwmController.o:	PwmController.cpp
-	$(CC) $(CFLAGS) PwmController.cpp $(CTRAIL)
+PCA9685.o:	PCA9685.cpp
+	$(CC) $(CFLAGS) PCA9685.cpp $(CTRAIL)
+
+I2cBus.o:	I2cBus.cpp
+	$(CC) $(CFLAGS) I2cBus.cpp $(CTRAIL)
+	

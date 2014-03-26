@@ -8,13 +8,13 @@
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>
-#include "PwmController.h"
+#include "PCA9685.h"
 #include "PwmServo.h"
 
 using namespace std;
 
 /****************************************************************/
-PwmServo::PwmServo (PwmServoConfig* config, PwmController* controller)
+PwmServo::PwmServo (PwmServoConfig* config, PCA9685* controller)
 {
 	baseConfig = config;
 	currentPos = -1;
@@ -31,13 +31,13 @@ PwmServo::~PwmServo(void)
 int PwmServo::init(void)
 {
 	ready = -1;
-	if (! pwm->isReady()) pwm->init();
+	if (! pwm->isReady()) pwm->reset();
 	if (! pwm->isReady()) {
 		cout << "PWM Controller could not be initialized." << endl;
 		exit(1);
 	}
-	cfg.frequency = pwm->getPwmFrequency();
-	cfg.resolution = pwm->getPwmResolution();
+	cfg.frequency = pwm->getFrequency();
+	cfg.resolution = pwm->getResolution();
 
 	double resolutionFactor = cfg.resolution / baseConfig->resolution;
 	double frameSizeFactor = (1000 / cfg.frequency) / (1000 / baseConfig->frequency);
@@ -61,6 +61,7 @@ int PwmServo::isReady(void) { return ready; }
 /****************************************************************/
 void PwmServo::printStatus (void)
 {
+	pwm->printStatus();
 	cout << "SERVO STATUS" << endl;
 	cout << "------------" << endl << endl;
 	cout << "Is Ready      :  " << (isReady() ? "Yes" : "No") << endl;

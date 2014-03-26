@@ -84,7 +84,7 @@ int main (int argv, char** args)
 	reg1Lo = 0;
 	reg1Hi = 0;
 	reg2Lo = reg & 0x00ff;
-	reg2Hi = reg >> 8; // removes all bits from the second byte in this int
+	reg2Hi = reg >> 8;
 	cout << "reg = " << dec << reg << " {0x" << hex << reg << ")" << endl;
 	cout << "reg2Lo: 0x" << hex << reg2Lo << " or " << dec << reg2Lo << endl;
 	cout << "reg2Hi: 0x" << hex << reg2Hi << " or " << dec << reg2Hi << endl;
