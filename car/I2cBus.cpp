@@ -65,7 +65,7 @@ int I2cBus::read8 (int address, int reg)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return i2c::wiringPiI2CReadReg8 (fd, reg);
+	return wiringPiI2CReadReg8 (fd, reg);
 }
 
 /**********************************************************/
@@ -74,7 +74,7 @@ int I2cBus::read16 (int address, int reg)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return i2c::wiringPiI2CReadReg16 (fd, reg);
+	return wiringPiI2CReadReg16 (fd, reg);
 }
 
 /**********************************************************/
@@ -83,7 +83,7 @@ void I2cBus::write8 (int address, int reg, int data)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return i2c::wiringPiI2CWriteReg8 (fd, reg, data);
+	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/
@@ -92,7 +92,7 @@ void I2cBus::write16 (int address, int reg, int data)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return i2c::wiringPiI2CWriteReg8 (fd, reg, data);
+	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/
