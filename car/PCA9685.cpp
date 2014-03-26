@@ -52,6 +52,7 @@ void PCA9685::printStatus (void)
 	cout << "Is asleep          : " << (isAsleep() ? "Yes" : "No") << endl;
 	cout << "Address on I2C Bus : 0x" << hex << address << dec << endl;
 	cout << "PWM frequency      : " << getFrequency() << "Hz" << endl;
+	cout << "Mode1 Register     : 0x" << hex << i2c->read8(address, MODE1_REG) << dec << endl;
 	cout << endl;
 }
 

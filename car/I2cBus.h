@@ -22,8 +22,8 @@ public:
 	void setSlave (int address);
 	int read8 (int address, int reg);
 	int read16 (int address, int reg);
-	void write8 (int address, int reg, int data);
-	void write16 (int address, int reg, int data);
+	int write8 (int address, int reg, int data);
+	int write16 (int address, int reg, int data);
 
 private:
 	int ready;

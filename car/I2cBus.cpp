@@ -47,6 +47,7 @@ int I2cBus::init(void)
 /**********************************************************/
 void I2cBus::setSlave (int address)
 {
+	cout << "Setting new slave as 0x" << hex << address << dec << endl;
 	if (! ready) return;
 	if (! fd) return;
 	if (ioctl (fd, I2C_SLAVE, address) >= 0)
@@ -65,7 +66,9 @@ int I2cBus::read8 (int address, int reg)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return wiringPiI2CReadReg8 (fd, reg);
+	int data = wiringPiI2CReadReg8 (fd, reg);
+	cout << "Read8 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
+	return data;
 }
 
 /**********************************************************/
@@ -74,25 +77,29 @@ int I2cBus::read16 (int address, int reg)
 	if (! ready) return -1;
 	if (fd < 0) return -1;
 	if (address != currentSlave) setSlave(address);
-	return wiringPiI2CReadReg16 (fd, reg);
+	int data = wiringPiI2CReadReg16 (fd, reg);
+	cout << "Read16 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
+	return data;
 }
 
 /**********************************************************/
-void I2cBus::write8 (int address, int reg, int data)
+int I2cBus::write8 (int address, int reg, int data)
 {
+	cout << "Write8 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
 	if (! ready) return;
 	if (fd < 0) return;
 	if (address != currentSlave) setSlave(address);
-	wiringPiI2CWriteReg8 (fd, reg, data);
+	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/
-void I2cBus::write16 (int address, int reg, int data)
+int I2cBus::write16 (int address, int reg, int data)
 {
+	cout << "Write16 addr=0x" << hex << address << " register=0x" << reg << " value=" << dec << data << endl;
 	if (! ready) return;
 	if (fd < 0) return;
 	if (address != currentSlave) setSlave(address);
-	wiringPiI2CWriteReg8 (fd, reg, data);
+	return wiringPiI2CWriteReg8 (fd, reg, data);
 }
 
 /**********************************************************/

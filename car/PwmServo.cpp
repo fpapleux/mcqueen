@@ -61,7 +61,6 @@ int PwmServo::isReady(void) { return ready; }
 /****************************************************************/
 void PwmServo::printStatus (void)
 {
-	pwm->printStatus();
 	cout << "SERVO STATUS" << endl;
 	cout << "------------" << endl << endl;
 	cout << "Is Ready      :  " << (isReady() ? "Yes" : "No") << endl;
