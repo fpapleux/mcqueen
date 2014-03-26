@@ -26,6 +26,7 @@ PwmServo::PwmServo (PwmServoConfig* config, PCA9685* controller)
 /****************************************************************/
 PwmServo::~PwmServo(void)
 {
+	pwm->setPwm(cfg.channel, cfg.posInit);
 }
 
 /****************************************************************/
@@ -50,7 +51,7 @@ int PwmServo::init(void)
 	cfg.posMinRight = (int) baseConfig->posMinRight * resolutionFactor * frameSizeFactor;
 	cfg.posMaxRight = (int) baseConfig->posMaxRight * resolutionFactor * frameSizeFactor;
 
-	cout << "Sending " << cfg.posInit << " to the car's servo for initialization." << endl;
+	// cout << "Sending " << cfg.posInit << " to the car's servo for initialization." << endl;
 	pwm->setPwm(cfg.channel, cfg.posInit);
 	currentPos = cfg.posInit;
 	ready = 1;
