@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <ctype.h>
+#include <string.h>
 #include <wiringPi.h>
 #include "RaspberryPi.h"
 #include "I2cBus.h"

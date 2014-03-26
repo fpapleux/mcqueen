@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <ctype.h>
+#include <string.h>
 #include "PCA9685.h"
 #include "PwmServo.h"
 #include "Car.h"
