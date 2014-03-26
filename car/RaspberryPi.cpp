@@ -65,7 +65,7 @@ void RaspberryPi::printStatus (void)
 	cout << "-------------------" << endl;
 	cout << endl;
 	cout << "Is Ready   : " << (ready ? "Yes" : "No") << endl;
-	cout << "I2C Bus    : " << (i2c != NULL ? "Present " << (i2c->isReady() ? "and Ready" : "but Not Ready")  : "Absent") << endl;
+	cout << "I2C Bus    : " << (i2c != NULL ? string("Present ").append((i2c->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
 	cout << endl;
 	if (i2c) i2c->printStatus();
 }
