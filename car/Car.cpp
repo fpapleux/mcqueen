@@ -77,3 +77,21 @@ void Car::printStatus (void)
 	i2c->printStatus();
 }
 
+/****************************************************************/
+int	Car::rightPct (int percent)
+{
+	return servo->rightPct(percent);
+}
+
+/****************************************************************/
+int	Car::leftPct (int percent)
+{
+	return servo->leftPct(percent);
+}
+
+/****************************************************************/
+int	Car::straight (void)
+{
+	return servo->straight();
+}
+

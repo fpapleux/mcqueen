@@ -22,9 +22,9 @@ public:
 	void printStatus (void);	// prints full status of the car
 
 	// managing direction .. returns 1 for success
-	//int 	rightPct (int percent);
-	//int 	leftPct (int percent);
-	//int 	straight (void);
+	int 	rightPct (int percent);
+	int 	leftPct (int percent);
+	int 	straight (void);
 
 	// managing throttle
 	//int 	forwardPct (int percent);
