@@ -38,6 +38,7 @@ int PwmServo::init(void)
 	}
 	cfg.frequency = pwm->getFrequency();
 	cfg.resolution = pwm->getResolution();
+	cfg.channel = baseConfig->channel;
 
 	double resolutionFactor = cfg.resolution / baseConfig->resolution;
 	double frameSizeFactor = (1000 / cfg.frequency) / (1000 / baseConfig->frequency);
@@ -49,7 +50,7 @@ int PwmServo::init(void)
 	cfg.posMaxRight = (int) baseConfig->posMaxRight * resolutionFactor * frameSizeFactor;
 
 	cout << "Sending " << cfg.posInit << " to the car's servo for initialization." << endl;
-	pwm->setPwm(cfg.address, cfg.posInit);
+	pwm->setPwm(cfg.channel, cfg.posInit);
 	currentPos = cfg.posInit;
 	ready = 1;
 	return ready;

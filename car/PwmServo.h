@@ -33,7 +33,7 @@
  */
 
 struct PwmServoConfig {
-	int address;		// indicate what is the address this Servo should provide the PWM controller to send information
+	int channel;		// indicate what is the address/channel this Servo should provide the PWM controller to send information
 	int frequency;		// in Hz
 	int resolution;		// resolution of the PWM value (PCA9685 is a 12-bit resolution so values should range from 0 to 4095, which means the value here should be 4096)
 	int posInit;		// position to initialize the servo at.

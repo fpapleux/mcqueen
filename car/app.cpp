@@ -17,11 +17,11 @@ int main (int argv, char** args) {
 		car.printStatus();
 		for (int i = 0; i < 10; i++) {
 			car.leftPct(80);
-			delay(200);
+			delay(1000);
 			car.straight();
-			delay(200);
+			delay(1000);
 			car.rightPct(80);
-			delay(200);
+			delay(1000);
 			car.straight();
 		}
 	}
