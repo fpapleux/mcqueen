@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <ctype.h>
 #include "PCA9685.h"
 #include "PwmServo.h"
 #include "Car.h"
@@ -15,6 +16,7 @@ using namespace std;
 /****************************************************************/
 Car::Car(void)
 {
+	pi = NULL;
 	i2c = NULL;
 	pwm = NULL;
 	servo = NULL;
@@ -25,42 +27,47 @@ Car::Car(void)
 /****************************************************************/
 Car::~Car(void)
 {
-	if (servo != NULL) delete servo;
-	if (pwm != NULL) delete pwm;
-	if (i2c != NULL) delete i2c;
+	if (servo) delete servo;
+	if (pwm) delete pwm;
+	if (pi) delete pi;
 }
 
 /****************************************************************/
 void Car::init(void)
 {
-	servoConfig = {
-		8,			// Address to be used by this servo to send commands through the PWM controller
-		50, 		// Hz - baseFrequency
-		4096,		// 12-bits - baseResolution
-		330,		// posInit
-		330,		// posStraight
-		331,		// posMinLeft
-		460,		// posMaxLeft
-		329,		// posMinRight
-		215			// posMaxRight
-	};
-	i2c = new I2cBus();
-	pwm = new PCA9685(i2c, 0x40, 50);			// initializing the PWM controller at I2C address 0x40, and using 50Hz as the PWM pulse frequency
-	servo = new PwmServo(&servoConfig, pwm);
-	ready = 1;
+	ready = -1;
+	servoConfig.channel = 8;
+	servoConfig.frequency = 50;
+	servoConfig.resolution = 4096;
+	servoConfig.posInit = 330;
+	servoConfig.posStraight = 330;
+	servoConfig.posMinLeft = 331;
+	servoConfig.posMaxLeft = 460;
+	servoConfig.posMinRight = 329;
+	servoConfig.posMaxRight = 215;
+	pi = new RaspberryPi();
+	if (pi && pi->isReady()) {
+		i2c = pi->getI2cBus();
+		pwm = new PCA9685(i2c, 0x40, 50);			// initializing the PWM controller at I2C address 0x40, and using 50Hz as the PWM pulse frequency
+		servo = new PwmServo(&servoConfig, pwm);
+		if (i2c->isReady() && pwm->isReady() && servo->isReady()) ready = 1;
+	}
 }
 
 /****************************************************************/
 int Car::isReady () { return ready; }
 
 /****************************************************************/
-PwmServo* Car::getServo (void) { return servo; }
+PwmServo *Car::getServo (void) { return servo; }
 
 /****************************************************************/
-PCA9685* Car::getPCA9685 (void) { return pwm; }
+PCA9685 *Car::getPCA9685 (void) { return pwm; }
 
 /****************************************************************/
-I2cBus* Car::getI2cBus (void) { return i2c; }
+I2cBus *Car::getI2cBus (void) { return i2c; }
+
+/****************************************************************/
+RaspberryPi *Car::getRaspberryPi (void) { return pi; }
 
 /****************************************************************/
 void Car::printStatus (void)
@@ -68,13 +75,14 @@ void Car::printStatus (void)
 	cout << "CAR DETAILED STATUS" << endl;
 	cout << "-------------------" << endl << endl;
 	cout << "Is Ready              : " << (ready ? "Yes" : "No") << endl;
-	cout << "Servo motor           : " << (servo != NULL ? "Present" : "Absent") << endl;
-	cout << "PCA9685 controller    : " << (pwm != NULL ? "Present" : "Absent") << endl;
-	cout << "I2C Bus               : " << (i2c != NULL ? "Present" : "Absent") << endl;
+	cout << "Raspberry Pi          : " << (pi    ? strcat("Present", (pi->isReady()    ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "Pi I2C Bus            : " << (i2c   ? strcat("Present", (i2c->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "PCA9685 (PWM)         : " << (pwm   ? strcat("Present", (pwm->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "Servo (direction)     : " << (servo ? strcat("Present", (servo->isReady() ? " and Ready" : " but not ready")) : "Absent") << endl;
 	cout << endl;
-	servo->printStatus();
+	pi->printStatus();
 	pwm->printStatus();
-	i2c->printStatus();
+	servo->printStatus();
 }
 
 /****************************************************************/

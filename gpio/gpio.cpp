@@ -19,6 +19,7 @@ namespace i2c {
 
 #include <iostream>
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/ioctl.h>
 #include "gpio.h"
 

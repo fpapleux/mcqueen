@@ -138,7 +138,7 @@ void PCA9685::setPwm (int channel, int data)
 	int regLo = data & 0x00ff;
 	int regHi = data >> 8;
 	int reg = (channel * 4) + 6;
-	cout << "Setting PWM for channel " << channel << " registers starting 0x" << hex << reg << " total value of 0x" << data << " in 2 bytes: 0x" << regHi << " & 0x" << regLo << dec << endl;
+	// cout << "Setting PWM for channel " << channel << " registers starting 0x" << hex << reg << " total value of 0x" << data << " in 2 bytes: 0x" << regHi << " & 0x" << regLo << dec << endl;
 	i2c->write8 (address, reg, 0x00);
 	i2c->write8 (address, reg + 1, 0x00);
 	i2c->write8 (address, reg + 2, regLo);
