@@ -77,10 +77,10 @@ void Car::printStatus (void)
 	cout << "CAR DETAILED STATUS" << endl;
 	cout << "-------------------" << endl << endl;
 	cout << "Is Ready              : " << (ready ? "Yes" : "No") << endl;
-	cout << "Raspberry Pi          : " << (pi != NULL    ? strcat("Present", (pi->isReady()    ? " and Ready" : " but not ready")) : "Absent") << endl;
-	cout << "Pi I2C Bus            : " << (i2c != NULL   ? strcat("Present", (i2c->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
-	cout << "PCA9685 (PWM)         : " << (pwm != NULL   ? strcat("Present", (pwm->isReady()   ? " and Ready" : " but not ready")) : "Absent") << endl;
-	cout << "Servo (direction)     : " << (servo != NULL ? strcat("Present", (servo->isReady() ? " and Ready" : " but not ready")) : "Absent") << endl;
+	cout << "Raspberry Pi          : " << (pi != NULL    ? "Present" << (pi->isReady()    ? " and Ready" : " but not ready") : "Absent") << endl;
+	cout << "Pi I2C Bus            : " << (i2c != NULL   ? "Present" << (i2c->isReady()   ? " and Ready" : " but not ready") : "Absent") << endl;
+	cout << "PCA9685 (PWM)         : " << (pwm != NULL   ? "Present" << (pwm->isReady()   ? " and Ready" : " but not ready") : "Absent") << endl;
+	cout << "Servo (direction)     : " << (servo != NULL ? "Present" << (servo->isReady() ? " and Ready" : " but not ready") : "Absent") << endl;
 	cout << endl;
 	pi->printStatus();
 	pwm->printStatus();
