@@ -133,6 +133,7 @@ int PwmServo::rightPct (int percent)
 /****************************************************************/
 int PwmServo::turnPct (int percent)
 {
+	cout << "Turning to " << percent << endl;
 	if (! percent) return straight();
 	else if (percent < 0) return leftPct(abs(percent));
 	else return rightPct (percent);
