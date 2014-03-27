@@ -108,8 +108,7 @@ int PwmEsc::stop (void)
 int PwmEsc::forwardPct (int percent)
 {
 	int value;
-	int pctValue = (abs(cfg.posMaxForward - cfg.posMinForward) / 100) * percent;
-	cout << "pctValue=" << pctValue << endl;
+	double pctValue = (abs((double) cfg.posMaxForward - (double) cfg.posMinForward) / 100) * (double) percent;
 	if (percent == 0) value = cfg.posIdle;
 	else value = (fmin(cfg.posMinForward, cfg.posMaxForward) == cfg.posMinForward ? cfg.posMinForward + pctValue : cfg.posMinForward - pctValue);
 	cout << "Moving to position forward " << percent << "% with value " << value << " based on min " << cfg.posMinForward << " and max " << cfg.posMaxForward << endl;
@@ -124,7 +123,7 @@ int PwmEsc::forwardPct (int percent)
 int PwmEsc::backwardPct (int percent)
 {
 	int value;
-	int pctValue = (abs(cfg.posMaxBackward - cfg.posMinBackward) / 100) * percent;
+	double pctValue = (abs((double) cfg.posMaxBackward - (double) cfg.posMinBackward) / 100) * (double) percent;
 	if (percent == 0) value = cfg.posIdle;
 	else value = (fmin(cfg.posMinBackward, cfg.posMaxBackward) == cfg.posMinBackward ? cfg.posMinBackward + pctValue : cfg.posMinBackward - pctValue);
 	cout << "Moving to position backward " << percent << "% with value " << value << " based on min " << cfg.posMinBackward << " and max " << cfg.posMaxBackward << endl;

@@ -118,7 +118,7 @@ int PwmServo::leftPct (int percent)
 int PwmServo::rightPct (int percent)
 {
 	int value;
-	int pctValue = (abs(cfg.posMaxRight - cfg.posMinRight) / 100) * percent;
+	double pctValue = (abs((double) cfg.posMaxRight - (double) cfg.posMinRight) / 100) * (double) percent;
 	if (percent == 0) value = cfg.posStraight;
 	else value = (fmin(cfg.posMinRight, cfg.posMaxRight) == cfg.posMinRight ? cfg.posMinRight + pctValue : cfg.posMinRight - pctValue);
 	cout << "Moving to position right " << percent << "% with value " << value << " based on min " << cfg.posMinRight << " and max " << cfg.posMaxRight << endl;
