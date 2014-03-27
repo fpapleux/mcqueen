@@ -18,10 +18,9 @@ int main (int argv, char** args) {
 		car.printStatus();
 		car.stop();
 		for (int i = 0; i < 5; i++) {
-			car.speedPct(i * 10);
+			car.speedPct(i * 14);
 			for (b = -100; b < 100; b++) {
 				car.turnPct(b);
-
 				delay(5);
 			}
 			for (b = 100; b > -100; b--) {
@@ -29,6 +28,7 @@ int main (int argv, char** args) {
 				delay(5);
 			}
 		}
+		car.stop();
 	}
 
 }

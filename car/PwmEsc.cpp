@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>
+#include <wiringPi.h>
 #include "PCA9685.h"
 #include "PwmEsc.h"
 
@@ -52,6 +53,10 @@ int PwmEsc::init(void)
 	cfg.posMaxBackward = (int) baseConfig->posMaxBackward * resolutionFactor * frameSizeFactor;
 
 	// cout << "Sending " << cfg.posInit << " to the car's servo for initialization." << endl;
+	pwm->setPwm(cfg.channel, cfg.posMaxForward);
+	delay(100);
+	pwm->setPwm(cfg.channel, cfg.posIdle);
+	delay(100);
 	pwm->setPwm(cfg.channel, cfg.posInit);
 	currentPos = cfg.posInit;
 	ready = 1;
@@ -106,7 +111,7 @@ int PwmEsc::forwardPct (int percent)
 	int pctValue = (abs(cfg.posMaxForward - cfg.posMinForward) / 100) * percent;
 	if (percent == 0) value = cfg.posIdle;
 	else value = (fmin(cfg.posMinForward, cfg.posMaxForward) == cfg.posMinForward ? cfg.posMinForward + pctValue : cfg.posMinForward - pctValue);
-	// cout << "Moving to position forward " << percent << "% with value " << value << " based on min " << cfg.posMinForward << " and max " << cfg.posMaxForward << endl;
+	cout << "Moving to position forward " << percent << "% with value " << value << " based on min " << cfg.posMinForward << " and max " << cfg.posMaxForward << endl;
 	if (ready && pwm->isReady()) {
 		pwm->setPwm(cfg.channel, value);
 		currentPos = value;
@@ -121,7 +126,7 @@ int PwmEsc::backwardPct (int percent)
 	int pctValue = (abs(cfg.posMaxBackward - cfg.posMinBackward) / 100) * percent;
 	if (percent == 0) value = cfg.posIdle;
 	else value = (fmin(cfg.posMinBackward, cfg.posMaxBackward) == cfg.posMinBackward ? cfg.posMinBackward + pctValue : cfg.posMinBackward - pctValue);
-	// cout << "Moving to position backward " << percent << "% with value " << value << " based on min " << cfg.posMinBackward << " and max " << cfg.posMaxBackward << endl;
+	cout << "Moving to position backward " << percent << "% with value " << value << " based on min " << cfg.posMinBackward << " and max " << cfg.posMaxBackward << endl;
 	if (ready && pwm->isReady()) {
 		pwm->setPwm(cfg.channel, value);
 		currentPos = value;
@@ -133,6 +138,7 @@ int PwmEsc::backwardPct (int percent)
 /****************************************************************/
 int PwmEsc::speedPct (int percent)
 {
+	cout << "Setting ESC PWM to " << percent << "%" << endl;
 	if (! percent) return stop();
 	else if (percent < 0) return backwardPct(abs(percent));
 	else return forwardPct (percent);

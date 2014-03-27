@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <wiringPi.h>
+#include "PwmEsc.h"
 #include "PwmServo.h"
 #include "PCA9685.h"
 #include "I2cBus.h"
@@ -65,8 +67,11 @@ void Car::init(void)
 	if (pi && pi->isReady()) {
 		i2c = 	pi->getI2cBus();
 		pwm = 	new PCA9685 	(i2c, 0x40, 50);			// initializing the PWM controller at I2C address 0x40, and using 50Hz as the PWM pulse frequency
+		delay(50);
 		servo = new PwmServo 	(&servoConfig, pwm);
+		delay(100);
 		esc = 	new PwmEsc		(&escConfig, pwm);
+		delay(100);
 		if (i2c->isReady() && pwm->isReady() && servo->isReady() && esc->isReady()) ready = 1;
 	}
 }
@@ -138,16 +143,19 @@ int	Car::turn (int pwmValue)
 	return servo->setPwm(pwmValue);
 }
 
+/****************************************************************/
 int	Car::forwardPct (int percent)
 {
 	return esc->forwardPct(percent);
 }
 
+/****************************************************************/
 int	Car::backwardPct (int percent)
 {
 	return esc->backwardPct(percent);
 }
 
+/****************************************************************/
 int	Car::stop (void)
 {
 	return esc->stop();
