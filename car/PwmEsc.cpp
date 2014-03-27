@@ -109,6 +109,7 @@ int PwmEsc::forwardPct (int percent)
 {
 	int value;
 	int pctValue = (abs(cfg.posMaxForward - cfg.posMinForward) / 100) * percent;
+	cout << "pctValue=" << pctValue << endl;
 	if (percent == 0) value = cfg.posIdle;
 	else value = (fmin(cfg.posMinForward, cfg.posMaxForward) == cfg.posMinForward ? cfg.posMinForward + pctValue : cfg.posMinForward - pctValue);
 	cout << "Moving to position forward " << percent << "% with value " << value << " based on min " << cfg.posMinForward << " and max " << cfg.posMaxForward << endl;
