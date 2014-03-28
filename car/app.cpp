@@ -19,8 +19,9 @@ int main (int argv, char** args) {
 	string in;
 	int throttle;
 
+	car.printStatus();
+
 	if (car.isReady()) {
-		car.printStatus();
 		car.stop();
 		in = "";
 		while (in != "quit") {
