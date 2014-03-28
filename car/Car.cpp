@@ -53,15 +53,15 @@ void Car::init(void)
 	servoConfig.posMinRight = 329;
 	servoConfig.posMaxRight = 215;
 
-	escConfig.channel 			= 9;
-	escConfig.frequency 		= 50;
-	escConfig.resolution 		= 4096;
-	escConfig.posInit 			= 335;
-	escConfig.posIdle 			= 335;
-	escConfig.posMinForward 	= 340;
-	escConfig.posMaxForward		= 375;
-	escConfig.posMinBackward	= 334;
-	escConfig.posMaxBackward	= 310;
+	escConfig.channel 		= 9;
+	escConfig.frequency 	= 50;
+	escConfig.resolution 	= 4096;
+	escConfig.posInit 		= 335;
+	escConfig.posIdle 		= 335;
+	escConfig.posMinForward	= 357;
+	escConfig.posMaxForward	= 450;
+	escConfig.posMinReverse	= 324;
+	escConfig.posMaxReverse	= 210;
 
 	pi = new RaspberryPi();
 	if (pi && pi->isReady()) {
@@ -69,9 +69,9 @@ void Car::init(void)
 		pwm = 	new PCA9685 	(i2c, 0x40, 50);			// initializing the PWM controller at I2C address 0x40, and using 50Hz as the PWM pulse frequency
 		delay(50);
 		servo = new PwmServo 	(&servoConfig, pwm);
-		delay(100);
+		delay(50);
 		esc = 	new PwmEsc		(&escConfig, pwm);
-		delay(100);
+		delay(50);
 		if (i2c->isReady() && pwm->isReady() && servo->isReady() && esc->isReady()) ready = 1;
 	}
 }

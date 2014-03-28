@@ -10,15 +10,14 @@
 
 #include "PCA9685.h"
 
-/*** This class requires a PWM controller class where to send the following commands:
+/*** This class requires a PWM controller class (implemented here as PCA9685) where to send the following commands:
  *
- * int init (void)							// resets controller
+ * int reset (void)							// resets controller
  * int isReady (void)						// returns 1 if controller is ready
- * int getPwmFrequency (void)				// Returns the current frequency
- * int getPwmResolution (void)				// Returns the current resolution used by the PWM controller
- * int setPwm (int channel, int data)		// Sets the start & stop PWM value for me (still figure out meRef)
- * int getPwm (int channel)					// Gets the stop value of the PWM
- * int printStatus (void)					// Sends detailed status of the controller to the screen
+ * int getFrequency ()						// Returns the current frequency used by the controller to determine pulse width
+ * int getResolution (void)					// Returns the current resolution of the PWM controller (PCA9685 is standard at 12)
+ * int setPwm (int channel, int data)		// Sets the stop PWM value for a channel.  (the start value is to be assumed as 0)
+ * int getPwm (int channel)					// Gets the current stop value of the PWM
  *
  */
 
@@ -40,8 +39,8 @@ struct PwmEscConfig {
 	int posIdle;	// value for straight position
 	int posMinForward;		// in principle, this will be idle+-1.  For ESC's, which use the same technology, there could be a difference between purely idle and the beginning of movement
 	int posMaxForward;
-	int posMinBackward;
-	int posMaxBackward;
+	int posMinReverse;
+	int posMaxReverse;
 };
 
 class PwmEsc
@@ -55,7 +54,7 @@ public:
 	void	printStatus(void);
 
 	int forwardPct (int percent);
-	int backwardPct (int percent);
+	int reversePct (int percent);
 	int stop (void);
 	int speedPct (int percent);	// going from -100% (full backward) to +100% (full forward) -- 0 being the straight/middle point
 
@@ -64,7 +63,7 @@ public:
 
 private:
 	int ready;
-	int currentPos;					// Holds the current position
+	int lastPwm;					// Holds the current PWM value (position)
 	PwmEscConfig cfg;				// actual configuration used to manipulate the esc
 	PwmEscConfig* baseConfig;		// config provided by user at initialization to be used as base during operation
 	PCA9685 *pwm;					// pointer to a PWM controller, the address of which should be provided at creation time
