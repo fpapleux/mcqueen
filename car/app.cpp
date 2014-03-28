@@ -26,13 +26,13 @@ int main (int argv, char** args) {
 		in = "";
 		while (in != "quit") {
 			throttle = 0;
-			cout << "Set throttle to: ";
+			cout << "Set % throttle to: ";
 			cin >> in;
 
 			try { throttle = stoi(in); }
 			catch (const invalid_argument& e) { }
 
-			if (throttle) { car.getEsc()->setPwm(throttle); }
+			if (throttle) { car.speedPct(throttle); }
 		}
 		car.stop();
 	}

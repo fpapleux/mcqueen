@@ -168,17 +168,18 @@ int PwmEsc::init(void)
 	// not checking for the success of those commands here because if they didn't work,
 	// we will see that later when we set the initial position
 	pwm->setPwm(cfg.channel, cfg.posMaxForward);
-	delay(10);
+	delay(5);
 	pwm->setPwm(cfg.channel, cfg.posMaxReverse);
-	delay(10);
+	delay(5);
 	pwm->setPwm(cfg.channel, cfg.posIdle);
-	delay(10);
+	delay(5);
 
 
 	// Send command to set the ESC is the initial position (as specified in the config)
 	success = pwm->setPwm(cfg.channel, cfg.posInit);
-	delay(10);
+	delay(5);
 
+	// On success, save the last good PWM value and set the ready flag to 1 (success)
 	if (success)
 	{
 		lastPwm = cfg.posInit;
@@ -373,9 +374,9 @@ int PwmEsc::reversePct (int percent)
 	if (current >= cfg.posMinForward && current <= cfg.posMaxForward)
 	{
 		stop();
-		delay(10);
+		delay(100);
 		stop();
-		delay(10);
+		delay(100);
 	}
 
 
