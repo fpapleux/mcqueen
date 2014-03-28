@@ -1,5 +1,5 @@
-CC=g++
-CFLAGS=-c -stdlib=libc++ -Wall
+CC=g++-4.7
+CFLAGS=-c -Wall -std=c++11
 CTRAIL=-lwiringPi
 LDFLAGS=
 LDTRAIL=-lwiringPi
