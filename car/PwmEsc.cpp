@@ -179,7 +179,11 @@ int PwmEsc::init(void)
 	success = pwm->setPwm(cfg.channel, cfg.posInit);
 	delay(10);
 
-	if (success) lastPwm = cfg.posInit;
+	if (success)
+	{
+		lastPwm = cfg.posInit;
+		ready = 1;
+	}
 	return success;
 }
 
