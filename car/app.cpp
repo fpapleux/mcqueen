@@ -6,27 +6,31 @@
  */
 
 #include <iostream>
+#include <string>
 #include <wiringPi.h>
 #include "Car.h"
 
 using namespace std;
 
 int main (int argv, char** args) {
-	int b;
+
 	Car car;
+	string in;
+	int throttle;
+
 	if (car.isReady()) {
 		car.printStatus();
 		car.stop();
-		for (int i = 0; i < 5; i++) {
-			car.speedPct(i * 14);
-			for (b = -100; b < 100; b+=5) {
-				car.turnPct(b);
-				delay(5);
-			}
-			for (b = 100; b > -100; b-=5) {
-				car.turnPct(b);
-				delay(5);
-			}
+		in = "";
+		while (in != "quit") {
+			throttle = 0;
+			cout << "Set throttle to: ";
+			cin >> in;
+
+			try { throttle = stoi(in); }
+			catch (const invalid_argument& e) { }
+
+			if (throttle) { car.getEsc()->setPwm(throttle); }
 		}
 		car.stop();
 	}
