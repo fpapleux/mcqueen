@@ -32,7 +32,7 @@ public:
 
 	// managing throttle
 	int 	forwardPct (int percent);
-	int 	backwardPct (int percent);
+	int 	reversePct (int percent);
 	int		speedPct (int percent);			// ranges from -100% for full backward to +100% for full forward.
 	int 	stop (void);
 

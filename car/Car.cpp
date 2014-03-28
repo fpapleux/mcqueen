@@ -150,9 +150,9 @@ int	Car::forwardPct (int percent)
 }
 
 /****************************************************************/
-int	Car::backwardPct (int percent)
+int	Car::reversePct (int percent)
 {
-	return esc->backwardPct(percent);
+	return esc->reversePct(percent);
 }
 
 /****************************************************************/
