@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <wiringPi.h>
 #include "Car.h"
 
