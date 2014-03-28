@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall std=c++0x 
 CTRAIL=-lwiringPi
 LDFLAGS=
 LDTRAIL=-lwiringPi
