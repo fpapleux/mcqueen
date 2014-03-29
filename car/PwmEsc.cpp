@@ -367,13 +367,15 @@ int PwmEsc::reversePct (int percent)
 	// If we are moving forward, we will first have to stop.  ESC's have a safety system that requires
 	// sending a stop command before being able to go in reverse.
 	current = getPwm();
-	cout << "Sending reverse command -> Current PWM value is " << current << endl;
+	cout << "Sending reverse command " << value << " -> Current PWM value is " << current << endl;
 
 	// If we are moving forward, send 2 stop commands. Also send 2 small delays in-between to ensure the system
 	// had time to respond/acknowledge
 	if (current >= cfg.posMinForward && current <= cfg.posMaxForward)
 	{
 		stop();
+		delay(100);
+		pwm->setPwm(cfg.channel, value);
 		delay(100);
 		stop();
 		delay(100);
