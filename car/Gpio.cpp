@@ -5,6 +5,7 @@
  *      Author: fabien papleux
  */
 #include <iostream>
+#include "Gpio.h"
 
 using namespace std;
 

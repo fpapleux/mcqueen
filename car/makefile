@@ -30,6 +30,6 @@ I2cBus.o:			I2cBus.cpp
 Gpio.o:				Gpio.cpp
 	$(CC) $(CFLAGS) Gpio.cpp $(CTRAIL)
 
-RaspberryPi.o:		I2cBus.o RaspberryPi.cpp
+RaspberryPi.o:		Gpio.o I2cBus.o RaspberryPi.cpp
 	$(CC) $(CFLAGS) RaspberryPi.cpp $(CTRAIL)
 	
