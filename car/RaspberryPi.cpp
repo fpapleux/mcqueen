@@ -13,15 +13,21 @@
 
 using namespace std;
 
+
+
+
 RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;
 	i2c = NULL;
-	if (initPi()) {
+	gpio = NULL;
+	init();
+	if (init()) {
 		initI2cBus();
 		if (i2c->isReady()) ready = 1;
 	}
 }
+
 
 
 
@@ -32,17 +38,29 @@ RaspberryPi::~RaspberryPi (void)
 
 
 
+
 int RaspberryPi::isReady (void)
 {
 	return ready;
 }
 
 
-int RaspberryPi::initPi (void)
+
+
+int RaspberryPi::init (void)
 {
-	if (wiringPiSetup() != -1) return 1;
-	else return 0;
+	int success = 0;
+	ready = 0;
+
+	if (wiringPiSetup() != -1) success = 1;
+	if (success) success = initGpio();
+	if (success) success = initI2cBus();
+	if (success) ready = 1;
+	return ready;
 }
+
+
+
 
 int RaspberryPi::initI2cBus (void)
 {
@@ -53,10 +71,31 @@ int RaspberryPi::initI2cBus (void)
 
 
 
+
+int RaspberryPi::initGpio (void)
+{
+	if (! gpio) gpio = new Gpio();
+	if (! gpio->isReady()) gpio->init();
+	return gpio->isReady();
+}
+
+
+
+
 I2cBus *RaspberryPi::getI2cBus (void)
 {
 	return i2c;
 }
+
+
+
+
+Gpio *RaspberryPi::getGpio (void)
+{
+	return gpio;
+}
+
+
 
 
 void RaspberryPi::printStatus (void)
@@ -65,7 +104,9 @@ void RaspberryPi::printStatus (void)
 	cout << "-------------------" << endl;
 	cout << endl;
 	cout << "Is Ready   : " << (ready ? "Yes" : "No") << endl;
+	cout << "Gpio       : " << (gpio != NULL ? string("Present ").append((gpio->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
 	cout << "I2C Bus    : " << (i2c != NULL ? string("Present ").append((i2c->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
 	cout << endl;
+	if (gpio) gpio->printStatus();
 	if (i2c) i2c->printStatus();
 }

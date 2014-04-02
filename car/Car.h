@@ -20,7 +20,7 @@ class Car
 public:
 	Car (void);
 	~Car (void);
-	void init (void);			// initializes the car system, puts all systems in neutral and ready to begin operating (isReady)
+	int init (void);			// initializes the car system, puts all systems in neutral and ready to begin operating (isReady)
 	void printStatus (void);	// prints full status of the car
 
 	// managing direction
