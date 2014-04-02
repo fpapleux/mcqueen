@@ -33,7 +33,7 @@ void Gpio::printStatus (void)
 {
 	cout << "GPIO Status" << endl;
 	cout << "-----------" << endl;
-	cout endl;
+	cout << endl;
 	cout << "Is Ready : " << (isReady() ? "Yes" : "No") << endl;
 	cout << endl;
 }
