@@ -8,11 +8,15 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
+#include "Pin.h"
+
+#define	GPIO_4	4
+
 class Gpio
 {
 
 public:
-	Gpio();
+	Gpio (int raspiVersion);		// expecting '1' for Raspberry version 1 and '2' for version 2
 	~Gpio();
 
 	int init (void);
@@ -20,8 +24,9 @@ public:
 	void printStatus (void);
 
 private:
+	int version;
 	int ready;
-
+	Pin pins[32];
 };
 
 

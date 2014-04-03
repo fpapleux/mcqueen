@@ -9,8 +9,11 @@
 
 using namespace std;
 
-Gpio::Gpio ()
+Gpio::Gpio (int raspiVersion)
 {
+	ready = 0;
+	if ((raspiVersion == 1) || (raspiVersion == 2)) version = raspiVersion;
+	else version = 0;
 	init();
 }
 

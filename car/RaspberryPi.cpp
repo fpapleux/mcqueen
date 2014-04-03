@@ -22,10 +22,6 @@ RaspberryPi::RaspberryPi (void)
 	i2c = NULL;
 	gpio = NULL;
 	init();
-	if (init()) {
-		initI2cBus();
-		if (i2c->isReady()) ready = 1;
-	}
 }
 
 
@@ -34,6 +30,7 @@ RaspberryPi::RaspberryPi (void)
 RaspberryPi::~RaspberryPi (void)
 {
 	if (i2c) delete i2c;
+	if (gpio) delete gpio;
 }
 
 
