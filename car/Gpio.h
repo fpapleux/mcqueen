@@ -3,6 +3,11 @@
  *
  *  Created on: Apr 1, 2014
  *      Author: fabien papleux
+ *
+ *  We will be using the GPIO class to control communications with individual
+ *  IO pins.  The I2C, SPI and UART pins will be managed separately by their
+ *  own classes.
+ *
  */
 
 #ifndef GPIO_H_
@@ -26,7 +31,7 @@ public:
 private:
 	int version;
 	int ready;
-	Pin pins[32];
+	Pin pins[8];					// We will only use the bottom 8 pins in GPIO
 };
 
 
