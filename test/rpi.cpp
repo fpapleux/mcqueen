@@ -19,7 +19,7 @@ int main () {
 	string cpuModel, cpuSerial;
 	int cpuRevision = -1;
 
-	string line, l;
+	string line, l, l1, l2;
 	stringstream ss;
 	int rev;
 	int found = 0;
@@ -56,8 +56,8 @@ int main () {
 	}
 	f.close();
 	cout << "CPU Serial = [" << cpuSerial << "]" << endl;
-	cout << "CPU model = [" << cpuSerial << "]" << endl;
-	cout << "CPU Revision = [" << cpuSerial << "]" << endl;
+	cout << "CPU model = [" << cpuModel << "]" << endl;
+	cout << "CPU Revision = [" << cpuRevision << "]" << endl;
 
 }
 
