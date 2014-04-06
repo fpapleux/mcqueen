@@ -38,7 +38,8 @@ int main () {
 	while (getline(f, line)) {
 		if (line.find("Revision") != -1)
 		{
-			ss << line >> l >> l >> hex >> cpuRevision >> dec;
+			ss << line;
+			ss >> l >> l >> hex >> cpuRevision >> dec;
 		}
 		if (line.find("model name") != -1)
 		{
@@ -46,7 +47,8 @@ int main () {
 		}
 		if (line.find("Serial") != -1)
 		{
-			ss << line >> l >> l >> cpuSerial;
+			ss << line;
+			ss >> l >> l >> cpuSerial;
 		}
 	}
 	f.close();
