@@ -31,6 +31,7 @@ int main () {
 	string line;
 	stringstream ss;
 	int rev;
+	int found;
 
 	// Points to the file containing this machine's system/cpu information
 	string cpuInfoPath = CPUINFO;
@@ -44,7 +45,9 @@ int main () {
 	// While there are lines to read in the file,
 
 	while (getline(f, line)) {
-		cout << line << endl;
+		cout << "line is: [" << line << "]" << endl;
+		found = line.find("Revision");
+		cout << "Value of found: " << found << endl << endl;
 		if (line.find("Revision")) {
 			ss << line;
 			ss >> line >> line >> hex >> rev;
