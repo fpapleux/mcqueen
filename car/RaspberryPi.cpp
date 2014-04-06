@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string.h>
 #include <fstream>
+#include <sstream>
 #include <wiringPi.h>
 #include "RaspberryPi.h"
 #include "Gpio.h"
