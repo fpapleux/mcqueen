@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <cstring>
+#include <string>
 #include "Pin.h"
 
 using namespace std;
