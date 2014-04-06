@@ -38,15 +38,18 @@ int main () {
 	while (getline(f, line)) {
 		if (line.find("Revision") != -1)
 		{
+			cout << "Found Revision..." << endl;
 			ss << line;
 			ss >> l >> l >> hex >> cpuRevision >> dec;
 		}
 		if (line.find("model name") != -1)
 		{
+			cout << "Found model name" << endl;
 			cpuModel = line.substr(13, line.length() - 13);
 		}
 		if (line.find("Serial") != -1)
 		{
+			cout << "Found serial number" << endl;
 			ss << line;
 			ss >> l >> l >> cpuSerial;
 		}
@@ -56,8 +59,6 @@ int main () {
 	cout << "CPU model = [" << cpuSerial << "]" << endl;
 	cout << "CPU Revision = [" << cpuSerial << "]" << endl;
 
-	// closing the file
-	f.close();
 }
 
 
