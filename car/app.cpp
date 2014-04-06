@@ -17,7 +17,7 @@ int main (int argv, char** args) {
 
 	Car car;
 	string in;
-	int throttle;
+	int pct;
 
 	car.printStatus();
 
@@ -25,14 +25,33 @@ int main (int argv, char** args) {
 		car.stop();
 		in = "";
 		while (in != "quit") {
-			throttle = 0;
-			cout << "Set % throttle to: ";
-			cin >> in;
 
-			try { throttle = stoi(in); }
-			catch (const invalid_argument& e) { }
+			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q") {
+				cout << "(W)heels, (P)ower (Q)uit : ";
+				cin >> in;
+			}
 
-			if (throttle) { car.speedPct(throttle); }
+			if (in == "p" || in == "P") {
+				pct = 0;
+				cout << "Set % throttle to: ";
+				cin >> in;
+				try { pct = stoi(in); }
+				catch (const invalid_argument& e) { }
+				if (pct) { car.speedPct(pct); }
+			}
+
+			if (in == "w" || in == "W") {
+				pct = 0;
+				cout << "Set % turn to: ";
+				cin >> in;
+				try { pct = stoi(in); }
+				catch (const invalid_argument& e) { }
+				if (pct) { car.turnPct(pct); }
+			}
+
+			if (in == "q" || in == "Q") {
+				in = "quit";
+			}
 		}
 		car.stop();
 	}
