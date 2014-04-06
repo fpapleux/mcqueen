@@ -26,17 +26,21 @@ public:
 	int initI2cBus (void);
 	int initGpio (void);
 
-	int getRevision (void);
-	int isReady (void);
-	void printStatus(void);
+	int 	isReady (void);
+	void 	printStatus(void);
 
 	I2cBus	*getI2cBus (void);
 	Gpio	*getGpio (void);
+	int 	getRevision (void);
+	int		getVersion (void);
+	const char	*getModel (void);
+	const char	*getSerial (void);
 
 private:
 	int 	ready;
 	int 	cpuRevision;
 	string	cpuModel;
+	int 	version;
 	string	cpuSerial;
 	I2cBus	*i2c;
 	Gpio	*gpio;

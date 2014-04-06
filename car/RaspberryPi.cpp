@@ -22,8 +22,9 @@ RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;
 	cpuModel = "";
-	cpuRevision = -1;
+	cpuRevision = 0;
 	cpuSerial = "";
+	version = 0;
 	i2c = NULL;
 	gpio = NULL;
 	init();
@@ -53,7 +54,7 @@ int RaspberryPi::init (void)
 {
 	int success = 0;
 	ready = 0;
-
+	getCpuInfo();
 	if (wiringPiSetup() != -1) success = 1;
 	if (success) success = initGpio();
 	if (success) success = initI2cBus();
@@ -102,8 +103,9 @@ Gpio *RaspberryPi::getGpio (void)
 void RaspberryPi::getCpuInfo (void)
 {
 	cpuModel = "";
-	cpuRevision = -1;
+	cpuRevision = 0;
 	cpuSerial = "";
+	version = 0;
 
 	string line, l;
 	stringstream ss;
@@ -115,52 +117,62 @@ void RaspberryPi::getCpuInfo (void)
 	{
 		if (line.find("Revision") != -1)
 		{
-			ss << line >> l >> l >> hex >> cpuRevision >> dec;
+			ss << line;
+			ss >> l >> l >> hex >> cpuRevision >> dec;
 		}
 		if (line.find("model name") != -1)
-		{
-			cpuModel = line.substr(13, line.length() - 13);
-		}
+			cpuModel = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
 		if (line.find("Serial") != -1)
-		{
-			ss << line >> l >> l >> cpuSerial;
-		}
+			cpuSerial = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
 	}
 	f.close();
-	cout << "CPU Serial = [" << cpuSerial << "]" << endl;
-	cout << "CPU model = [" << cpuSerial << "]" << endl;
-	cout << "CPU Revision = [" << cpuSerial << "]" << endl;
+	if (cpuRevision) {
+		/**
+		 * Setting Raspberry Pi board revision based on Gordon Henderson's table used in wiringPi
+		 * 	0000 - Error
+		 *	0001 - Not used
+		 *	0002 - Rev 1
+		 *	0003 - Rev 1
+		 *	0004 - Rev 2 (Early reports?
+		 *	0005 - Rev 2 (but error?)
+		 *	0006 - Rev 2
+		 *	0008 - Rev 2 - Model A
+		 *	000e - Rev 2 + 512MB
+		 *	000f - Rev 2 + 512MB
+		 *	Basically, version 1 if Revision is 1,2 or 3
+		 */
+		if (cpuRevision >= 1 && cpuRevision <= 3) version = 1;
+		else version = 2;
+	}
 }
 
 
 int RaspberryPi::getRevision (void)
 {
+	if (cpuRevision) return cpuRevision;
+	getCpuInfo();
+	return cpuRevision;
+}
+
+int RaspberryPi::getVersion (void)
+{
 	if (version) return version;
-
-
-	while (getline(f, line)) {
-		// cout << "line is: [" << line << "]" << endl;
-		// found = line.find("Revision");
-		// cout << "Value of found: " << found << endl << endl;
-		if (line.find("Revision") != -1) {
-			found = 1;
-			ss << line;
-			ss >> l1 >> l2 >> hex >> rev;
-		}
-	}
-
-	if (found) {
-		cout << "L1: [" << l1 << "]" << endl;
-		cout << "L2: [" << l2 << "]" << endl;
-		cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
-	}
-
-	// closing the file
-	f.close();
-
-
-
+	getCpuInfo();
 	return version;
+}
+
+const char *RaspberryPi::getModel (void)
+{
+	if (cpuModel != "") return cpuModel.c_str();
+	getCpuInfo();
+	return cpuModel.c_str();
+}
+
+const char *RaspberryPi::getSerial (void)
+{
+	if (cpuSerial != "") return cpuSerial.c_str();
+	getCpuInfo();
+	return cpuSerial.c_str();
 }
 
 
@@ -169,9 +181,13 @@ void RaspberryPi::printStatus (void)
 	cout << "Raspberry Pi Status" << endl;
 	cout << "-------------------" << endl;
 	cout << endl;
-	cout << "Is Ready   : " << (ready ? "Yes" : "No") << endl;
-	cout << "Gpio       : " << (gpio != NULL ? string("Present ").append((gpio->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
-	cout << "I2C Bus    : " << (i2c != NULL ? string("Present ").append((i2c->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
+	cout << "Is Ready       : " << (ready ? "Yes" : "No") << endl;
+	cout << "Model Name     : " << cpuModel << endl;
+	cout << "Serial Number  : " << cpuSerial << endl;
+	cout << "Board revision : " << cpuRevision << endl;
+	cout << "Board version  : " << version << endl;
+	cout << "Gpio           : " << (gpio != NULL ? string("Present ").append((gpio->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
+	cout << "I2C Bus        : " << (i2c != NULL ? string("Present ").append((i2c->isReady() ? "and Ready" : "but Not Ready"))  : "Absent") << endl;
 	cout << endl;
 	if (gpio) gpio->printStatus();
 	if (i2c) i2c->printStatus();
