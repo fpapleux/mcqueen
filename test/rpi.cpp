@@ -11,6 +11,8 @@
 
 using namespace std;
 
+#define CPUINFO "/proc/cpuinfo"
+
 int main () {
 
 	struct cpu_data {
@@ -26,9 +28,11 @@ int main () {
 
 
 	string line;
+	stringstream ss;
+	int rev;
 
 	// Points to the file containing this machine's system/cpu information
-	string cpuInfoPath = "/proc/cpuinfo";
+	string cpuInfoPath = CPUINFO;
 
 	// Opens the file for reading, using the C string version of the path
 	ifstream f(cpuInfoPath.c_str());
@@ -40,7 +44,13 @@ int main () {
 
 	while (getline(f, line)) {
 		cout << line << endl;
+		if (line.find("Revision")) {
+			ss << line;
+			ss >> line >> line >> hex >> rev;
+		}
 	}
+
+	if (rev != 0) cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
 
 	// closing the file
 	f.close();

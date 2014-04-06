@@ -7,8 +7,10 @@
 
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #include <wiringPi.h>
 #include "RaspberryPi.h"
+#include "Gpio.h"
 #include "I2cBus.h"
 
 using namespace std;
@@ -19,6 +21,7 @@ using namespace std;
 RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;
+	version = 0;
 	i2c = NULL;
 	gpio = NULL;
 	init();
@@ -93,6 +96,12 @@ Gpio *RaspberryPi::getGpio (void)
 }
 
 
+int RaspberryPi::getVersion (void)
+{
+	if (version) return version;
+
+	return version;
+}
 
 
 void RaspberryPi::printStatus (void)

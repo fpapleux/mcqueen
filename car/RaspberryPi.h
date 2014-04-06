@@ -11,24 +11,29 @@
 #include "Gpio.h"
 #include "I2cBus.h"
 
+#define 	CPUINFO			"/proc/cpuinfo"
+
+
 class RaspberryPi
 {
 public:
-	RaspberryPi ();
-	~RaspberryPi ();
+	RaspberryPi (void);
+	~RaspberryPi (void);
 
 	int init (void);
 	int initI2cBus (void);
 	int initGpio (void);
 
-	int isReady ();
-	void printStatus();
+	int getVersion (void);
+	int isReady (void);
+	void printStatus(void);
 
 	I2cBus	*getI2cBus (void);
 	Gpio	*getGpio (void);
 
 private:
 	int ready;
+	int version;
 	I2cBus	*i2c;
 	Gpio	*gpio;
 
