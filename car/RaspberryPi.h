@@ -8,11 +8,13 @@
 #ifndef RASPBERRYPI_H_
 #define RASPBERRYPI_H_
 
+#include <string>
 #include "Gpio.h"
 #include "I2cBus.h"
 
 #define 	CPUINFO			"/proc/cpuinfo"
 
+using namespace std;
 
 class RaspberryPi
 {
@@ -24,7 +26,7 @@ public:
 	int initI2cBus (void);
 	int initGpio (void);
 
-	int getVersion (void);
+	int getRevision (void);
 	int isReady (void);
 	void printStatus(void);
 
@@ -32,11 +34,14 @@ public:
 	Gpio	*getGpio (void);
 
 private:
-	int ready;
-	int version;
+	int 	ready;
+	int 	cpuRevision;
+	string	cpuModel;
+	string	cpuSerial;
 	I2cBus	*i2c;
 	Gpio	*gpio;
 
+	void getCpuInfo (void);
 };
 
 

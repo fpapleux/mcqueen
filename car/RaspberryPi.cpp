@@ -21,7 +21,9 @@ using namespace std;
 RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;
-	version = 0;
+	cpuModel = "";
+	cpuRevision = -1;
+	cpuSerial = "";
 	i2c = NULL;
 	gpio = NULL;
 	init();
@@ -74,7 +76,8 @@ int RaspberryPi::initI2cBus (void)
 
 int RaspberryPi::initGpio (void)
 {
-	if (! gpio) gpio = new Gpio();
+	if (cpuRevision == -1) getCpuInfo();
+	if ((cpuRevision != -1) && (! gpio)) gpio = new Gpio(cpuRevision);
 	if (! gpio->isReady()) gpio->init();
 	return gpio->isReady();
 }
@@ -96,9 +99,66 @@ Gpio *RaspberryPi::getGpio (void)
 }
 
 
-int RaspberryPi::getVersion (void)
+void RaspberryPi::getCpuInfo (void)
+{
+	cpuModel = "";
+	cpuRevision = -1;
+	cpuSerial = "";
+
+	string line, l;
+	stringstream ss;
+	int t;
+	string cpuInfoPath = CPUINFO;
+	ifstream f(cpuInfoPath.c_str());
+	if (! f.is_open()) return;
+	while (getline(f, line))
+	{
+		if (line.find("Revision") != -1)
+		{
+			ss << line >> l >> l >> hex >> cpuRevision >> dec;
+		}
+		if (line.find("model name") != -1)
+		{
+			cpuModel = line.substr(13, line.length() - 13);
+		}
+		if (line.find("Serial") != -1)
+		{
+			ss << line >> l >> l >> cpuSerial;
+		}
+	}
+	f.close();
+	cout << "CPU Serial = [" << cpuSerial << "]" << endl;
+	cout << "CPU model = [" << cpuSerial << "]" << endl;
+	cout << "CPU Revision = [" << cpuSerial << "]" << endl;
+}
+
+
+int RaspberryPi::getRevision (void)
 {
 	if (version) return version;
+
+
+	while (getline(f, line)) {
+		// cout << "line is: [" << line << "]" << endl;
+		// found = line.find("Revision");
+		// cout << "Value of found: " << found << endl << endl;
+		if (line.find("Revision") != -1) {
+			found = 1;
+			ss << line;
+			ss >> l1 >> l2 >> hex >> rev;
+		}
+	}
+
+	if (found) {
+		cout << "L1: [" << l1 << "]" << endl;
+		cout << "L2: [" << l2 << "]" << endl;
+		cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
+	}
+
+	// closing the file
+	f.close();
+
+
 
 	return version;
 }

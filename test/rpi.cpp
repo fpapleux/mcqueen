@@ -16,19 +16,10 @@ using namespace std;
 
 int main () {
 
-	struct cpu_data {
-		string implementer;
-		string architecture;
-		string variant;
-		string part;
-		string revision;
-	} cpu;
+	string cpuModel, cpuSerial;
+	int cpuRevision = -1;
 
-	string model, serialNumber, revision;
-
-
-
-	string line, l1, l2;
+	string line, l;
 	stringstream ss;
 	int rev;
 	int found = 0;
@@ -45,21 +36,23 @@ int main () {
 	// While there are lines to read in the file,
 
 	while (getline(f, line)) {
-		// cout << "line is: [" << line << "]" << endl;
-		// found = line.find("Revision");
-		// cout << "Value of found: " << found << endl << endl;
-		if (line.find("Revision") != -1) {
-			found = 1;
-			ss << line;
-			ss >> l1 >> l2 >> hex >> rev;
+		if (line.find("Revision") != -1)
+		{
+			ss << line >> l >> l >> hex >> cpuRevision >> dec;
+		}
+		if (line.find("model name") != -1)
+		{
+			cpuModel = line.substr(13, line.length() - 13);
+		}
+		if (line.find("Serial") != -1)
+		{
+			ss << line >> l >> l >> cpuSerial;
 		}
 	}
-
-	if (found) {
-		cout << "L1: [" << l1 << "]" << endl;
-		cout << "L2: [" << l2 << "]" << endl;
-		cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
-	}
+	f.close();
+	cout << "CPU Serial = [" << cpuSerial << "]" << endl;
+	cout << "CPU model = [" << cpuSerial << "]" << endl;
+	cout << "CPU Revision = [" << cpuSerial << "]" << endl;
 
 	// closing the file
 	f.close();
