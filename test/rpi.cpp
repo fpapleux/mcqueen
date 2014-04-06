@@ -45,13 +45,12 @@ int main () {
 		if (line.find("model name") != -1)
 		{
 			cout << "Found model name" << endl;
-			cpuModel = line.substr(13, line.length() - 13);
+			cpuModel = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
 		}
 		if (line.find("Serial") != -1)
 		{
 			cout << "Found serial number" << endl;
-			ss << line;
-			ss >> l >> l >> cpuSerial;
+			cpuSerial = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
 		}
 	}
 	f.close();
