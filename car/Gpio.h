@@ -31,7 +31,7 @@ public:
 private:
 	int version;
 	int ready;
-	Pin pins[8];					// We will only use the bottom 8 pins in GPIO
+	// Pin pins[8];					// We will only use the bottom 8 pins in GPIO
 };
 
 

@@ -11,7 +11,7 @@
 class Pin
 {
 public:
-	Pin (const char *name);
+	Pin (const char *newName);
 	~Pin (void);
 	int init (void);
 	int isReady (void);
