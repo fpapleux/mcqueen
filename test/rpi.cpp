@@ -28,10 +28,10 @@ int main () {
 
 
 
-	string line;
+	string line, l1, l2;
 	stringstream ss;
 	int rev;
-	int found;
+	int found = 0;
 
 	// Points to the file containing this machine's system/cpu information
 	string cpuInfoPath = CPUINFO;
@@ -45,16 +45,21 @@ int main () {
 	// While there are lines to read in the file,
 
 	while (getline(f, line)) {
-		cout << "line is: [" << line << "]" << endl;
-		found = line.find("Revision");
-		cout << "Value of found: " << found << endl << endl;
-		if (line.find("Revision")) {
+		// cout << "line is: [" << line << "]" << endl;
+		// found = line.find("Revision");
+		// cout << "Value of found: " << found << endl << endl;
+		if (line.find("Revision") != -1) {
+			found = 1;
 			ss << line;
-			ss >> line >> line >> hex >> rev;
+			ss >> l1 >> l2 >> hex >> rev;
 		}
 	}
 
-	if (rev != 0) cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
+	if (found) {
+		cout << "L1: [" << l1 << "]" << endl;
+		cout << "L2: [" << l2 << "]" << endl;
+		cout << "Revision is " << dec << rev << " en hexa 0x" << hex << rev;
+	}
 
 	// closing the file
 	f.close();
