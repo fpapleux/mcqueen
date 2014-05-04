@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include <cstring>
 #include "Pin.h"
 
@@ -15,7 +16,7 @@ using namespace std;
 Pin::Pin (const char *newName)
 {
 	ready = 0;
-	if (strlen(newName) <= 5) strcpy(name, newName);
+	name = newName;
 	init();
 }
 
@@ -28,6 +29,8 @@ int Pin::init (void)
 	ready = 0;
 	
 	// INSERT CODE HERE
+	// exporting pin on the system to communicate with it
+
 	
 	return ready;
 }
@@ -39,17 +42,11 @@ int Pin::isReady (void)
 
 void Pin::printStatus (void)
 {
-	cout << "Pin " << getName() << ":    mode = " << getMode() << "   value = " << getValue() << "   trigger = " << getTrigger() << endl;
+	cout << "Status of pin " << name << endl;
+	cout << endl;
 }
 
-const char *Pin::getName (void)
-{
-	// INSERT CODE HERE
-	
-	return name;
-}
-
-int Pin::getMode (void)
+string Pin::getMode (void)
 {
 	// INSERT CODE HERE
 	
@@ -63,14 +60,7 @@ int Pin::getValue (void)
 	return 1;
 }
 
-int Pin::getTrigger (void)
-{
-	// INSERT CODE HERE
-	
-	return 1;
-}
-
-int Pin::setMode (int newMode)
+int Pin::setMode (string newMode)
 {
 	int success = 0;
 	
@@ -80,15 +70,6 @@ int Pin::setMode (int newMode)
 }
 
 int Pin::setValue (int newValue)
-{
-	int success = 0;
-	
-	// INSERT CODE HERE
-	
-	return success;
-}
-
-int Pin::setTrigger (int newTrigger)
 {
 	int success = 0;
 	

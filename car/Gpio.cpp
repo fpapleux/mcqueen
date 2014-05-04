@@ -26,6 +26,8 @@ Gpio::~Gpio (void)
 int Gpio::init (void)
 {
 	ready = 1;
+
+
 	return ready;
 }
 

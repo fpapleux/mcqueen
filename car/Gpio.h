@@ -15,26 +15,27 @@
 
 #include "Pin.h"
 
-#define	GPIO_4	4
+#define MODEL_RASPI1	1
+#define MODEL_RASPI2	2
 
 class Gpio
 {
 
 public:
-	Gpio (int raspiVersion);		// expecting '1' for Raspberry version 1 and '2' for version 2
+	Gpio (int model);
+	// expecting a "model_xxxx" value.  (use the RaspberryPi's "getVersion" method to call this constructor
 	~Gpio();
 
-	int init (void);
-	int isReady (void);
-	void printStatus (void);
+	int		init		(void);
+	int		isReady		(void);
+	void	printStatus	(void);
+	Pin		*getPin		(int gpioNumber);
 
 private:
-	int version;
-	int ready;
-	// Pin pins[8];					// We will only use the bottom 8 pins in GPIO
+	int		version;
+	int		ready;
+	Pin		*pins[26];
+
 };
-
-
-
 
 #endif /* GPIO_H_ */

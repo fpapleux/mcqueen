@@ -17,8 +17,6 @@
 using namespace std;
 
 
-
-
 RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;

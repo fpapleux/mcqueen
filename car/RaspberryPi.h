@@ -31,7 +31,7 @@ public:
 
 	I2cBus	*getI2cBus (void);
 	Gpio	*getGpio (void);
-	int 	getRevision (void);
+
 	int		getVersion (void);
 	const char	*getModel (void);
 	const char	*getSerial (void);
@@ -45,7 +45,8 @@ private:
 	I2cBus	*i2c;
 	Gpio	*gpio;
 
-	void getCpuInfo (void);
+	void 	getCpuInfo (void);
+	int 	getRevision (void);
 };
 
 
