@@ -114,14 +114,14 @@ void RaspberryPi::getCpuInfo (void)
 	if (! f.is_open()) return;
 	while (getline(f, line))
 	{
-		if (line.find("Revision") != -1)
+		if (line.find("Revision") != string::npos)
 		{
 			ss << line;
 			ss >> l >> l >> hex >> cpuRevision >> dec;
 		}
-		if (line.find("model name") != -1)
+		if (line.find("model name") != string::npos)
 			cpuModel = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
-		if (line.find("Serial") != -1)
+		if (line.find("Serial") != string::npos)
 			cpuSerial = line.substr(line.find(":") + 2, line.length() - line.find(":") + 2);
 	}
 	f.close();
