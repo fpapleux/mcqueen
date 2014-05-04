@@ -32,11 +32,14 @@ public:
 	int isReady (void);
 	void printStatus (void);
 	
-	string		getMode		(void);
-	int 		getValue	(void);
+	string	getMode		(void);
+	int 	getValue	(void);
+
+	int 	setMode		(string newMode);
+	int 	setValue	(int newValue);
 	
-	int 		setMode		(string newMode);
-	int 		setValue	(int newValue);
+	int		pinExport	(void);
+	int		pinUnexport	(void);
 	
 private:
 	int ready;

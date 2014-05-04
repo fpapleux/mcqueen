@@ -50,7 +50,7 @@ string Pin::getMode (void)
 {
 	// INSERT CODE HERE
 	
-	return 1;
+	return "none";
 }
 
 int Pin::getValue (void)
