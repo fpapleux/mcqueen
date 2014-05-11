@@ -43,7 +43,6 @@ int Pin::init (void)
 	
 	ready = 1;
 	// INSERT CODE HERE
-
 	
 	return ready;
 }
