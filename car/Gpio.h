@@ -22,19 +22,19 @@ class Gpio
 {
 
 public:
-	Gpio (int model);
-	// expecting a "model_xxxx" value.  (use the RaspberryPi's "getVersion" method to call this constructor
+	Gpio (int model);  // Use the RaspberryPi's "getVersion" method to feed the parameter of this constructor
 	~Gpio();
 
 	int		init		(void);
 	int		isReady		(void);
 	void	printStatus	(void);
+
 	Pin		*getPin		(int gpioNumber);
 
 private:
 	int		version;
 	int		ready;
-	Pin		*pins[26];
+	Pin		*pin[26];
 
 };
 

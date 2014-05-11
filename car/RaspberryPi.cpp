@@ -108,7 +108,6 @@ void RaspberryPi::getCpuInfo (void)
 
 	string line, l;
 	stringstream ss;
-	int t;
 	string cpuInfoPath = CPUINFO;
 	ifstream f(cpuInfoPath.c_str());
 	if (! f.is_open()) return;

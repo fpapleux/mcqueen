@@ -12,26 +12,20 @@
 
 #include <string>
 
-#define EXPORT_PATH		"/sys/class/gpio/export"
-#define	UNEXPORT_PATH	"/sys/class/gpio/unexport"
-#define PIN_PATH		"/sys/class/gpio/"			// add pin name number to this path
-#define	VALUE_PATH		"/value"						// append to pin path + pin number
-#define DIRECTION_PATH	"/direction"
-
-#define HIGH			1
-#define LOW				0
-
 using namespace std;
+
+
 
 class Pin
 {
 public:
-	Pin (const char *name);
+	Pin (int number);		// expects official GPIO number
 	~Pin (void);
 	int init (void);
 	int isReady (void);
 	void printStatus (void);
-	
+
+	/*
 	string	getMode		(void);
 	int 	getValue	(void);
 
@@ -40,10 +34,12 @@ public:
 	
 	int		pinExport	(void);
 	int		pinUnexport	(void);
+	*/
 	
 private:
 	int ready;
-	string name;
+	int pinNumber;		// GPIO number
+	int wpiNumber;		// wiringPi number
 
 };
 
