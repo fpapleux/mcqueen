@@ -62,7 +62,7 @@ int main (int argv, char** args) {
 				cin >> in;
 				try { pin = stoi(in); }
 				catch (const invalid_argument& e) { }
-				if (pin != "-1") {
+				if (pin != -1) {
 					cout << "Value: ";
 					cin >> in;
 					try { pct = stoi(in); }
@@ -70,6 +70,32 @@ int main (int argv, char** args) {
 					car.getRaspberryPi()->getGpio()->getPin(pin)->setValue(pct);
 				}
 			}
+		}
+		Gpio *gp = car.getRaspberryPi()->getGpio();
+		gp->getPin(15)->setValue(0);
+		gp->getPin(16)->setValue(0);
+		gp->getPin(18)->setValue(0);
+		gp->getPin(13)->setValue(1);
+		delay(150);
+		for (int t = 0; t < 10; t++) {
+			gp->getPin(15)->setValue(1);
+			gp->getPin(13)->setValue(0);
+			delay(150);
+			gp->getPin(16)->setValue(1);
+			gp->getPin(15)->setValue(0);
+			delay(150);
+			gp->getPin(18)->setValue(1);
+			gp->getPin(16)->setValue(0);
+			delay(150);
+			gp->getPin(16)->setValue(1);
+			gp->getPin(18)->setValue(0);
+			delay(150);
+			gp->getPin(15)->setValue(1);
+			gp->getPin(16)->setValue(0);
+			delay(150);
+			gp->getPin(13)->setValue(1);
+			gp->getPin(15)->setValue(0);
+			delay(150);
 		}
 		car.stop();
 	}
