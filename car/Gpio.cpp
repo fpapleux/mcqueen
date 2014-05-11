@@ -91,6 +91,10 @@ int Gpio::isReady (void)
 	return ready;
 }
 
+Pin	*Gpio::getPin(int number) {
+	return &pin[number];
+}
+
 void Gpio::printStatus (void)
 {
 	cout << "GPIO Status" << endl;
