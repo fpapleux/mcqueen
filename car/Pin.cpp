@@ -38,7 +38,10 @@ Pin::~Pin (void)
 int Pin::init (void)
 {
 	ready = 0;
+	pinMode (wpiNumber, OUTPUT);
+	digitalWrite (wpiNumber, LOW);
 	
+	ready = 1;
 	// INSERT CODE HERE
 
 	
