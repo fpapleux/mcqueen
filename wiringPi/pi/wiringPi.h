@@ -43,7 +43,7 @@
 #define	PWM_OUTPUT		 2
 #define	GPIO_CLOCK		 3
 
-#define	LOW			 0
+#define	LOW				 0
 #define	HIGH			 1
 
 // Pull up/down/none

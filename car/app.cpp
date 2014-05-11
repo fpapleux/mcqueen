@@ -17,7 +17,9 @@ int main (int argv, char** args) {
 
 	Car car;
 	string in;
+	int mode;
 	int pct;
+	int pin;
 
 	car.printStatus();
 
@@ -27,7 +29,7 @@ int main (int argv, char** args) {
 		while (in != "quit") {
 
 			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q") {
-				cout << "(W)heels, (P)ower (Q)uit : ";
+				cout << "(W)heels, (P)ower, P(i)n control, (Q)uit : ";
 				cin >> in;
 			}
 
@@ -51,6 +53,22 @@ int main (int argv, char** args) {
 
 			if (in == "q" || in == "Q") {
 				in = "quit";
+			}
+
+			if (in == "i" || in = "I") {
+				pct = 0;
+				pin = -1;
+				cout << "Which pin: ";
+				cin >> in;
+				try { pin = stoi(in); }
+				catch (const invalid_argument& e) { }
+				if (pin != "-1") {
+					cout << "Value: ";
+					cin >> in;
+					try { pct = stoi(in); }
+					catch (const invalid_argument& e) { }
+					car.getRaspberryPi()->getGpio()->getPin(pin)->setValue(pct);
+				}
 			}
 		}
 		car.stop();

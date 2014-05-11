@@ -29,7 +29,7 @@ public:
 	int		isReady		(void);
 	void	printStatus	(void);
 
-	Pin		*getPin		(int gpioNumber);
+	Pin		*getPin		(int physNumber); // Pins work based on their physical number
 
 private:
 	int		version;

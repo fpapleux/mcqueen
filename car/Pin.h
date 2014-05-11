@@ -14,6 +14,10 @@
 
 using namespace std;
 
+#define	MODE_IN		 0
+#define	MODE_OUT	 1
+#define	VALUE_LOW	 0
+#define	VALUE_HIGH	 1
 
 
 class Pin
@@ -25,22 +29,19 @@ public:
 	int isReady (void);
 	void printStatus (void);
 
-	/*
-	string	getMode		(void);
-	int 	getValue	(void);
+	int 	setMode		(int newMode);
+	int		getMode		(void);
 
-	int 	setMode		(string newMode);
 	int 	setValue	(int newValue);
-	
-	int		pinExport	(void);
-	int		pinUnexport	(void);
-	*/
+	int 	getValue	(void);
 	
 private:
 	int ready;
 	int pinNumber;		// GPIO number
 	int wpiNumber;		// wiringPi number
 
+	int mode;			// keeps track of the pin mode
+	int value;			// current value of the pin
 };
 
 

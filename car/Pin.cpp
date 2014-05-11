@@ -13,13 +13,14 @@
 
 using namespace std;
 
-static int gpioToWiringPi[32] =
-	{
-	8,	9,	-1,	-1,	7,	-1,	-1,	11,
-	10,	13,	12,	14,	0,	0,	15,	16,
-	-1,	0,	1,	-1,	-1,	2,	3,	4,
-	5,	6,	-1,	-1,	-1,	-1,	-1,	-1
-	};
+// Mapping from physical pin number to wiringPi number
+static int toWiringPi[27] =
+{
+		-1,	-1,	-1,	8,	-1,	9,	-1,	7,
+		15,	-1,	16,	0,	1,	2,	-1,	3,
+		4,	-1,	5,	12,	-1,	13,	6,	14,
+		-1,	11
+};
 
 
 Pin::Pin (int newNumber)
@@ -27,7 +28,7 @@ Pin::Pin (int newNumber)
 	// Assumes 'wiringPiSetup' is called only once, and not at Pin level
 	ready = 0;
 	pinNumber = newNumber;
-	wpiNumber = gpioToWiringPi[newNumber];	// translates into wiringPi numbering for calls
+	wpiNumber = toWiringPi[newNumber];	// translates into wiringPi numbering for calls
 	init();
 }
 
@@ -38,7 +39,10 @@ Pin::~Pin (void)
 int Pin::init (void)
 {
 	ready = 0;
-	pinMode (wpiNumber, OUTPUT);
+	mode = MODE_OUT;
+	setMode (mode);
+	value = VALUE_LOW;
+
 	digitalWrite (wpiNumber, LOW);
 	
 	ready = 1;
@@ -59,36 +63,35 @@ void Pin::printStatus (void)
 }
 
 
-/*
-string Pin::getMode (void)
+int Pin::setMode (int newMode)
 {
-	// INSERT CODE HERE
-	
-	return "none";
-}
-
-int Pin::getValue (void)
-{
-	// INSERT CODE HERE
-	
+	if ((newMode < 0) || (newMode > 1)) return 0;
+	pinMode (wpiNumber, newMode);
+	mode = newMode;
 	return 1;
 }
 
-int Pin::setMode (string newMode)
+
+int Pin::getMode (void)
 {
-	int success = 0;
-	
-	// INSERT CODE HERE
-	
-	return success;
+	return mode;
 }
+
 
 int Pin::setValue (int newValue)
 {
-	int success = 0;
-	
-	// INSERT CODE HERE
-	
-	return success;
+	digitalWrite (wpiNumber, newValue);
+	value = newValue;
+	return 1;
 }
-*/
+
+
+int Pin::getValue (void)
+{
+	if (mode == MODE_IN) {
+		value = digitalRead (wpiNumber);
+	}
+	return value;
+}
+
+

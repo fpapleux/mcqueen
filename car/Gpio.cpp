@@ -72,14 +72,14 @@ int Gpio::init (void)
 	if ((version == 1) || (version == 2))
 	{
 		// Not initializing I2C, UART or SPI pins by default.
-		pin[4] = new Pin(4);
-		pin[17] = new Pin(17);
+		pin[7] = new Pin(7);
+		pin[11] = new Pin(11);
+		pin[12] = new Pin(12);
+		pin[13] = new Pin(13);
+		pin[15] = new Pin(15);
+		pin[16] = new Pin(16);
 		pin[18] = new Pin(18);
-		pin[21] = new Pin(21);
 		pin[22] = new Pin(22);
-		pin[23] = new Pin(23);
-		pin[24] = new Pin(24);
-		pin[25] = new Pin(25);
 	}
 	ready = 1;
 
