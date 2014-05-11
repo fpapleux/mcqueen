@@ -55,7 +55,7 @@ int main (int argv, char** args) {
 				in = "quit";
 			}
 
-			if (in == "i" || in = "I") {
+			if (in == "i" || in == "I") {
 				pct = 0;
 				pin = -1;
 				cout << "Which pin: ";
