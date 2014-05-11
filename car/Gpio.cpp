@@ -92,7 +92,7 @@ int Gpio::isReady (void)
 }
 
 Pin	*Gpio::getPin(int number) {
-	return &pin[number];
+	return pin[number];
 }
 
 void Gpio::printStatus (void)
