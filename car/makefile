@@ -7,7 +7,7 @@ LDTRAIL=-lwiringPi
 all:			car
 
 car:				RaspberryPi.o I2cBus.o Gpio.o PCA9685.o PwmEsc.o PwmServo.o Car.o app.o
-	$(CC) $(LDFLAGS) RaspberryPi.o I2cBus.o Pin.o Gpio.o PCA9685.o PwmEsc.o PwmServo.o Car.o app.o -o car $(LDTRAIL)
+	$(CC) $(LDFLAGS) Pin.o Gpio.o PwmEsc.o PwmServo.o PCA9685.o I2cBus.o RaspberryPi.o Car.o app.o -o car $(LDTRAIL)
 
 app.o: 				Car.o app.cpp
 	$(CC) $(CFLAGS) app.cpp $(CTRAIL)
@@ -27,8 +27,10 @@ PCA9685.o:			I2cBus.o PCA9685.cpp
 I2cBus.o:			I2cBus.cpp
 	$(CC) $(CFLAGS) I2cBus.cpp $(CTRAIL)
 
-Gpio.o:				Gpio.cpp Pin.cpp
+Pin.o:				Pin.cpp
 	$(CC) $(CFLAGS) Pin.cpp $(CTRAIL)
+
+Gpio.o:				Pin.o Gpio.cpp
 	$(CC) $(CFLAGS) Gpio.cpp $(CTRAIL)
 
 RaspberryPi.o:		Gpio.o I2cBus.o RaspberryPi.cpp
