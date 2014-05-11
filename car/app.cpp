@@ -27,7 +27,7 @@ int main (int argv, char** args) {
 		in = "";
 		while (in != "quit") {
 
-			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q") {
+			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q" && in != "i" && in != "I") {
 				cout << "(W)heels, (P)ower, P(i)n control, (Q)uit : ";
 				cin >> in;
 			}
@@ -79,7 +79,8 @@ int main (int argv, char** args) {
 		pin18->setValue(0);
 		pin13->setValue(1);
 		delay(150);
-		for (int t = 0; t < 10; t++) {
+		for (int t = 0; t < 10; t++)
+		{
 			pin15->setValue(1);
 			pin13->setValue(0);
 			delay(150);
