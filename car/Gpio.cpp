@@ -92,6 +92,7 @@ int Gpio::isReady (void)
 }
 
 Pin	*Gpio::getPin(int number) {
+	if ((number < 0) || (number > 26)) return 0;
 	return pin[number];
 }
 
@@ -101,6 +102,9 @@ void Gpio::printStatus (void)
 	cout << "-----------" << endl;
 	cout << endl;
 	cout << "Is Ready : " << (isReady() ? "Yes" : "No") << endl;
+	for (int i = 1; i < 26; i++) {
+		if (pin[i] != 0) pin[i]->printStatus();
+	}
 	cout << endl;
 }
 

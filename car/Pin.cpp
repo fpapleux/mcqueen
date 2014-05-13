@@ -58,7 +58,7 @@ int Pin::isReady (void)
 
 void Pin::printStatus (void)
 {
-	cout << "Status of pin " << pinNumber << endl;
+	cout << "Pin " << pinNumber << " (Phys), " << wpiNumber << " (wpi): " << "MODE = " << mode << ", VALUE = " << value << endl;
 	cout << endl;
 }
 
