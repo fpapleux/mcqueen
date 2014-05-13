@@ -23,7 +23,42 @@ int main (int argv, char** args) {
 	car.printStatus();
 
 	if (car.isReady()) {
+
 		car.stop();
+
+		pinMode (2, OUTPUT);
+		pinMode (3, OUTPUT);
+		pinMode (4, OUTPUT);
+		pinMode (5, OUTPUT);
+
+		digitalWrite (3, LOW);
+		digitalWrite (4, LOW);
+		digitalWrite (5, LOW);
+		digitalWrite (2, HIGH);
+		delay(200);
+
+		digitalWrite (3, HIGH);
+		digitalWrite (2, LOW);
+		delay(200);
+		digitalWrite (4, HIGH);
+		digitalWrite (3, LOW);
+		delay(200);
+		digitalWrite (5, HIGH);
+		digitalWrite (4, LOW);
+		delay(200);
+		digitalWrite (4, HIGH);
+		digitalWrite (5, LOW);
+		delay(200);
+		digitalWrite (3, HIGH);
+		digitalWrite (4, LOW);
+		delay(200);
+		digitalWrite (2, HIGH);
+		digitalWrite (3, LOW);
+		delay(200);
+
+	}
+
+		/*
 		in = "";
 		while (in != "quit") {
 
@@ -68,7 +103,9 @@ int main (int argv, char** args) {
 					catch (const invalid_argument& e) { }
 					car.getRaspberryPi()->getGpio()->getPin(pin)->setValue(pct);
 				}
+				in = "";
 			}
+
 		}
 		Pin *pin13 = car.getRaspberryPi()->getGpio()->getPin(13);
 		Pin *pin15 = car.getRaspberryPi()->getGpio()->getPin(15);
@@ -102,6 +139,8 @@ int main (int argv, char** args) {
 		}
 		car.stop();
 	}
+
+	*/
 
 }
 
