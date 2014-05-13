@@ -16,9 +16,8 @@ using namespace std;
 int main (int argv, char** args) {
 
 	Car car;
-	string in;
-	int pct;
-	int pin;
+	int t = 150;
+	int c;
 
 	car.printStatus();
 
@@ -35,27 +34,29 @@ int main (int argv, char** args) {
 		digitalWrite (4, LOW);
 		digitalWrite (5, LOW);
 		digitalWrite (2, HIGH);
-		delay(200);
+		delay(t);
 
-		digitalWrite (3, HIGH);
+		for (c = 0; c < 10; c++) {
+			digitalWrite (3, HIGH);
+			digitalWrite (2, LOW);
+			delay(t);
+			digitalWrite (4, HIGH);
+			digitalWrite (3, LOW);
+			delay(t);
+			digitalWrite (5, HIGH);
+			digitalWrite (4, LOW);
+			delay(t);
+			digitalWrite (4, HIGH);
+			digitalWrite (5, LOW);
+			delay(t);
+			digitalWrite (3, HIGH);
+			digitalWrite (4, LOW);
+			delay(t);
+			digitalWrite (2, HIGH);
+			digitalWrite (3, LOW);
+			delay(t);
+		}
 		digitalWrite (2, LOW);
-		delay(200);
-		digitalWrite (4, HIGH);
-		digitalWrite (3, LOW);
-		delay(200);
-		digitalWrite (5, HIGH);
-		digitalWrite (4, LOW);
-		delay(200);
-		digitalWrite (4, HIGH);
-		digitalWrite (5, LOW);
-		delay(200);
-		digitalWrite (3, HIGH);
-		digitalWrite (4, LOW);
-		delay(200);
-		digitalWrite (2, HIGH);
-		digitalWrite (3, LOW);
-		delay(200);
-
 	}
 
 		/*
