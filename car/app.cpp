@@ -24,7 +24,8 @@ int main (int argv, char** args) {
 	if (car.isReady()) {
 
 		car.stop();
-		Pin *p1 = new Pin(13);
+		// Pin *p1 = new Pin(13);
+		Pin *p1 = car.getRaspberryPi()->getGpio()->getPin(13);
 
 
 		p1->setMode(OUTPUT); //pinMode (2, OUTPUT);
