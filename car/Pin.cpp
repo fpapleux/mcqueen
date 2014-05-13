@@ -39,9 +39,9 @@ Pin::~Pin (void)
 int Pin::init (void)
 {
 	ready = 0;
-	mode = MODE_OUT;
+	mode = OUT;
 	setMode (mode);
-	value = VALUE_LOW;
+	value = LOW;
 
 	digitalWrite (wpiNumber, LOW);
 	

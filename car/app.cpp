@@ -27,7 +27,7 @@ int main (int argv, char** args) {
 		Pin p1(13);
 
 
-		p1.setMode(MODE_OUT); //pinMode (2, OUTPUT);
+		p1.setMode(OUTPUT); //pinMode (2, OUTPUT);
 		pinMode (3, OUTPUT);
 		pinMode (4, OUTPUT);
 		pinMode (5, OUTPUT);
