@@ -39,7 +39,7 @@ Pin::~Pin (void)
 int Pin::init (void)
 {
 	ready = 0;
-	mode = OUT;
+	mode = OUTPUT;
 	setMode (mode);
 	value = LOW;
 
@@ -88,7 +88,7 @@ int Pin::setValue (int newValue)
 
 int Pin::getValue (void)
 {
-	if (mode == MODE_IN) {
+	if (mode == INPUT) {
 		value = digitalRead (wpiNumber);
 	}
 	return value;
