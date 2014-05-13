@@ -24,8 +24,10 @@ int main (int argv, char** args) {
 	if (car.isReady()) {
 
 		car.stop();
+		Pin p1(13);
 
-		pinMode (2, OUTPUT);
+
+		p1.setMode(MODE_OUT); //pinMode (2, OUTPUT);
 		pinMode (3, OUTPUT);
 		pinMode (4, OUTPUT);
 		pinMode (5, OUTPUT);
@@ -33,12 +35,12 @@ int main (int argv, char** args) {
 		digitalWrite (3, LOW);
 		digitalWrite (4, LOW);
 		digitalWrite (5, LOW);
-		digitalWrite (2, HIGH);
+		p1.setValue(HIGH); // digitalWrite (2, HIGH);
 		delay(t);
 
 		for (c = 0; c < 10; c++) {
 			digitalWrite (3, HIGH);
-			digitalWrite (2, LOW);
+			p1.setValue(LOW); // digitalWrite (2, LOW);
 			delay(t);
 			digitalWrite (4, HIGH);
 			digitalWrite (3, LOW);
@@ -52,11 +54,11 @@ int main (int argv, char** args) {
 			digitalWrite (3, HIGH);
 			digitalWrite (4, LOW);
 			delay(t);
-			digitalWrite (2, HIGH);
+			p1.setValue(HIGH); // digitalWrite (2, HIGH);
 			digitalWrite (3, LOW);
 			delay(t);
 		}
-		digitalWrite (2, LOW);
+		p1.setValue(LOW); // digitalWrite (2, LOW);
 	}
 
 		/*

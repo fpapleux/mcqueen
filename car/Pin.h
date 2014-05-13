@@ -14,16 +14,16 @@
 
 using namespace std;
 
-#define	MODE_IN		 0
-#define	MODE_OUT	 1
-#define	VALUE_LOW	 0
-#define	VALUE_HIGH	 1
+#define	INPUT		 0
+#define	OUTPUT		 1
+#define	LOW			 0
+#define	HIGH		 1
 
 
 class Pin
 {
 public:
-	Pin (int number);		// expects official GPIO number
+	Pin (int number);		// expects physical number
 	~Pin (void);
 	int init (void);
 	int isReady (void);
