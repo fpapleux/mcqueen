@@ -55,8 +55,11 @@ int RaspberryPi::init (void)
 	ready = 0;
 	getCpuInfo();
 	if (wiringPiSetup() != -1) success = 1;
+	if (success) cout << "wiringPi setup successful" << endl; else cout << "Error in wiringPi setup" << endl;
 	if (success) success = initGpio();
+	if (success) cout << "gpio setup successful" << endl; else cout << "Error in gpio setup" << endl;
 	if (success) success = initI2cBus();
+	if (success) cout << "i2c bus setup successful" << endl; else cout << "Error in i2c bus setup" << endl;
 	if (success) ready = 1;
 	return ready;
 }

@@ -26,10 +26,8 @@ Gpio::Gpio (int raspiVersion)
 	ready = 0;
 	version = raspiVersion;
 
-
 	// Initializes all pins to null.  They will be initializes as part of the init sequence
 	for (int t = 0; t <= 26; t++) pin[t] = 0;
-
 
 	// Starts actual device initializing sequence
 	init();
@@ -72,6 +70,7 @@ int Gpio::init (void)
 	pin[22] = new Pin(22);
 
 	ready = 1;
+	cout << "Gpio Ready" << endl;
 	return ready;
 }
 
@@ -81,6 +80,7 @@ int Gpio::isReady (void)
 }
 
 Pin	*Gpio::getPin(int number) {
+	cout << "requesting access to pin " << number << endl;
 	if ((number >= 0) && (number <= 26)) return pin[number];
 	return 0;
 }
