@@ -47,7 +47,7 @@ Gpio::~Gpio (void)
 {
 	ready = 0;
 	// destroys all pin objects associated with this gpio
-	for (int t = 0; t < 26 ; t++)
+	for (int t = 0; t <= 26 ; t++)
 	{
 		if (pin[t]) delete pin[t];
 	}
@@ -81,8 +81,8 @@ int Gpio::isReady (void)
 }
 
 Pin	*Gpio::getPin(int number) {
-	if ((number < 0) || (number > 26)) return 0;
-	return pin[number];
+	if ((number >= 0) && (number <= 26)) return pin[number];
+	return 0;
 }
 
 void Gpio::printStatus (void)

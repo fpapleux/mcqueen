@@ -76,8 +76,8 @@ int RaspberryPi::initI2cBus (void)
 
 int RaspberryPi::initGpio (void)
 {
-	if (cpuRevision == -1) getCpuInfo();
-	if ((cpuRevision != -1) && (! gpio)) gpio = new Gpio(cpuRevision);
+	if (version == 0) getCpuInfo();
+	if ((version != 0) && (! gpio)) gpio = new Gpio(version);
 	if (! gpio->isReady()) gpio->init();
 	return gpio->isReady();
 }

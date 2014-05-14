@@ -43,8 +43,6 @@ int Pin::init (void)
 	value = LOW;
 	pinMode (wpiNumber, mode);
 	digitalWrite (wpiNumber, LOW);
-
-	cout << "Initialized pin " << pinNumber << " (wpi: " << wpiNumber << ")" << endl;
 	ready = 1;
 	return ready;
 }
