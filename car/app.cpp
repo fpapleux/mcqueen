@@ -25,42 +25,44 @@ int main (int argv, char** args) {
 	if (car.isReady()) {
 
 		car.stop();
-		// Pin *p1 = new Pin(13);
 		Pin *p1 = car.getRaspberryPi()->getPin(13);
+		Pin *p2 = car.getRaspberryPi()->getPin(15);
+		Pin *p3 = car.getRaspberryPi()->getPin(16);
+		Pin *p4 = car.getRaspberryPi()->getPin(18);
 
 
-		p1->setMode(OUTPUT); //pinMode (2, OUTPUT);
-		pinMode (3, OUTPUT);
-		pinMode (4, OUTPUT);
-		pinMode (5, OUTPUT);
+		p1->setMode(OUTPUT);
+		p2->setMode(OUTPUT);
+		p3->setMode(OUTPUT);
+		p4->setMode(OUTPUT);
 
-		digitalWrite (3, LOW);
-		digitalWrite (4, LOW);
-		digitalWrite (5, LOW);
-		p1->setValue(HIGH); // digitalWrite (2, HIGH);
+		p2->setValue(LOW);
+		p3->setValue(LOW);
+		p4->setValue(LOW);
+		p1->setValue(HIGH);
 		delay(t);
 
 		for (c = 0; c < 10; c++) {
-			digitalWrite (3, HIGH);
-			p1->setValue(LOW); // digitalWrite (2, LOW);
+			p2->setValue(HIGH);
+			p1->setValue(LOW);
 			delay(t);
-			digitalWrite (4, HIGH);
-			digitalWrite (3, LOW);
+			p3->setValue(HIGH);
+			p2->setValue(LOW);
 			delay(t);
-			digitalWrite (5, HIGH);
-			digitalWrite (4, LOW);
+			p4->setValue(HIGH);
+			p3->setValue(LOW);
 			delay(t);
-			digitalWrite (4, HIGH);
-			digitalWrite (5, LOW);
+			p3->setValue(HIGH);
+			p4->setValue(LOW);
 			delay(t);
-			digitalWrite (3, HIGH);
-			digitalWrite (4, LOW);
+			p2->setValue(HIGH);
+			p3->setValue(LOW);
 			delay(t);
-			p1->setValue(HIGH); // digitalWrite (2, HIGH);
-			digitalWrite (3, LOW);
+			p1->setValue(HIGH);
+			p2->setValue(LOW);
 			delay(t);
 		}
-		p1->setValue(LOW); // digitalWrite (2, LOW);
+		p1->setValue(LOW);
 	}
 
 		/*
