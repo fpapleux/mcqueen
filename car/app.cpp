@@ -16,6 +16,7 @@ using namespace std;
 int main (int argv, char** args) {
 
 	Car car;
+	cout << "Car is ready ..." << endl;
 	int t = 150;
 	int c;
 
