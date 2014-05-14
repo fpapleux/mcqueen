@@ -100,7 +100,6 @@ int Car::init(void)
 	// It could have been an Arduino or something else.
 	if (pi) delete pi;
 	pi = new RaspberryPi();
-	cout << "Pi initialized. Ready value: " << pi->isReady() << endl;
 
 	// if the microController did not initialized properly, exit with failure (0)
 	if ((! pi) || (! pi->isReady())) return 0;
@@ -108,7 +107,6 @@ int Car::init(void)
 
 	// the I2cBus is automatically initalized by the Raspberry Pi.  We are just reassigning the pointer
 	i2c = 	pi->getI2cBus();
-	cout << "Got i2cBus mapped" << endl;
 
 	// (Re-)creating and (Re-)initializing the PWM controller (PCA9685)
 	// using standard PCA9685 configuration: I2C address 0x40, and using 50Hz as the PWM pulse frequency
@@ -118,25 +116,21 @@ int Car::init(void)
 	if (pwm) delete pwm;
 	pwm = 	new PCA9685 	(i2c, 0x40, 50);
 	delay(50);
-	cout << "pwm initialized" << endl;
 
 
 	// (re-)Initializing the car's servo
 	if (servo) delete servo;
 	servo = new PwmServo 	(&servoConfig, pwm);
 	delay(50);
-	cout << "servo init done" << endl;
 
 
 	// (re-)Initializing the car's Electronic Speed Controller (ESC)
 	if (esc) delete esc;
 	esc = 	new PwmEsc		(&escConfig, pwm);
 	delay(50);
-	cout << "esc init done" << endl;
 
 	// Determining if all systems are a go before declaring the car 'ready'
 	if (i2c->isReady() && pwm->isReady() && servo->isReady() && esc->isReady()) ready = 1;
-	if (ready) cout << "car is ready" << endl; else cout << "Car is not ready" << endl;
 	return ready;
 }
 

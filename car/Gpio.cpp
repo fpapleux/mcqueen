@@ -70,7 +70,6 @@ int Gpio::init (void)
 	pin[22] = new Pin(22);
 
 	ready = 1;
-	cout << "Gpio Ready" << endl;
 	return ready;
 }
 
@@ -80,7 +79,6 @@ int Gpio::isReady (void)
 }
 
 Pin	*Gpio::getPin(int number) {
-	cout << "requesting access to pin " << number << endl;
 	if ((number >= 0) && (number <= 26)) return pin[number];
 	return 0;
 }

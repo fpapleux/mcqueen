@@ -44,7 +44,7 @@ int Pin::init (void)
 	pinMode (wpiNumber, mode);
 	digitalWrite (wpiNumber, LOW);
 	ready = 1;
-	cout << "Pin " << pinNumber << " ready" << endl;
+	// cout << "Pin " << pinNumber << " ready" << endl;
 	return ready;
 }
 
@@ -56,7 +56,6 @@ int Pin::isReady (void)
 void Pin::printStatus (void)
 {
 	cout << "Pin " << pinNumber << " (Phys), " << wpiNumber << " (wpi): " << "MODE = " << mode << ", VALUE = " << value << endl;
-	cout << endl;
 }
 
 

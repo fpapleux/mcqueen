@@ -30,7 +30,6 @@ int main (int argv, char** args) {
 		Pin *p3 = car.getRaspberryPi()->getPin(16);
 		Pin *p4 = car.getRaspberryPi()->getPin(18);
 
-
 		p1->setMode(OUTPUT);
 		p2->setMode(OUTPUT);
 		p3->setMode(OUTPUT);
@@ -113,36 +112,6 @@ int main (int argv, char** args) {
 				in = "";
 			}
 
-		}
-		Pin *pin13 = car.getRaspberryPi()->getGpio()->getPin(13);
-		Pin *pin15 = car.getRaspberryPi()->getGpio()->getPin(15);
-		Pin *pin16 = car.getRaspberryPi()->getGpio()->getPin(16);
-		Pin *pin18 = car.getRaspberryPi()->getGpio()->getPin(18);
-		pin15->setValue(0);
-		pin16->setValue(0);
-		pin18->setValue(0);
-		pin13->setValue(1);
-		delay(150);
-		for (int t = 0; t < 10; t++)
-		{
-			pin15->setValue(1);
-			pin13->setValue(0);
-			delay(150);
-			pin16->setValue(1);
-			pin15->setValue(0);
-			delay(150);
-			pin18->setValue(1);
-			pin16->setValue(0);
-			delay(150);
-			pin16->setValue(1);
-			pin18->setValue(0);
-			delay(150);
-			pin15->setValue(1);
-			pin16->setValue(0);
-			delay(150);
-			pin13->setValue(1);
-			pin15->setValue(0);
-			delay(150);
 		}
 		car.stop();
 	}
