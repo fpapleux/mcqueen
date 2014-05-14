@@ -115,19 +115,19 @@ int Car::init(void)
 	// Also inserting a small delay to let additional components get in place
 	if (pwm) delete pwm;
 	pwm = 	new PCA9685 	(i2c, 0x40, 50);
-	delay(10);
+	delay(50);
 
 
 	// (re-)Initializing the car's servo
 	if (servo) delete servo;
 	servo = new PwmServo 	(&servoConfig, pwm);
-	delay(10);
+	delay(50);
 
 
 	// (re-)Initializing the car's Electronic Speed Controller (ESC)
 	if (esc) delete esc;
 	esc = 	new PwmEsc		(&escConfig, pwm);
-	delay(10);
+	delay(50);
 
 
 	// Determining if all systems are a go before declaring the car 'ready'
