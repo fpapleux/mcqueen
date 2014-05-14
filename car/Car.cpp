@@ -100,7 +100,7 @@ int Car::init(void)
 	// It could have been an Arduino or something else.
 	if (pi) delete pi;
 	pi = new RaspberryPi();
-
+	cout << "Pi initialized. Ready value: " << pi->isReady() << endl;
 
 	// if the microController did not initialized properly, exit with failure (0)
 	if ((! pi) || (! pi->isReady())) return 0;
