@@ -113,6 +113,7 @@ int Car::init(void)
 	// (Re-)creating and (Re-)initializing the PWM controller (PCA9685)
 	// using standard PCA9685 configuration: I2C address 0x40, and using 50Hz as the PWM pulse frequency
 	// Also inserting a small delay to let additional components get in place
+	pi->getPin(7)->setValue(HIGH);
 	if (pwm) delete pwm;
 	pwm = 	new PCA9685 	(i2c, 0x40, 50);
 	delay(50);
