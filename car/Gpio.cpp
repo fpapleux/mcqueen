@@ -13,6 +13,7 @@
 
 using namespace std;
 
+
 /*
  * ---------------------------------------------------------------------------------------------------
  * CONSTRUCTOR
@@ -103,7 +104,7 @@ void Gpio::printStatus (void)
 	cout << endl;
 	cout << "Is Ready : " << (isReady() ? "Yes" : "No") << endl;
 	for (int i = 1; i < 26; i++) {
-		if (pin[i] != 0) pin[i]->printStatus();
+		if (pin[i] != 0) ((Pin *)pin[i])->printStatus();
 	}
 	cout << endl;
 }

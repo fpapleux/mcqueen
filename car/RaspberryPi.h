@@ -31,6 +31,7 @@ public:
 
 	I2cBus	*getI2cBus (void);
 	Gpio	*getGpio (void);
+	Pin		*getPin (int pinNumber);
 
 	int		getVersion (void);
 	const char	*getModel (void);

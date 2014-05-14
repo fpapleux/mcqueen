@@ -40,14 +40,12 @@ int Pin::init (void)
 {
 	ready = 0;
 	mode = OUTPUT;
-	setMode (mode);
 	value = LOW;
-
+	pinMode (wpiNumber, mode);
 	digitalWrite (wpiNumber, LOW);
-	
+
+	cout << "Initialized pin " << pinNumber << " (wpi: " << wpiNumber << ")" << endl;
 	ready = 1;
-	// INSERT CODE HERE
-	
 	return ready;
 }
 

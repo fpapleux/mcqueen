@@ -17,6 +17,16 @@
 using namespace std;
 
 
+// Mapping from physical pin number to wiringPi number
+static int toWiringPi[27] =
+{
+		-1,	-1,	-1,	8,	-1,	9,	-1,	7,
+		15,	-1,	16,	0,	1,	2,	-1,	3,
+		4,	-1,	5,	12,	-1,	13,	6,	14,
+		-1,	11
+};
+
+
 RaspberryPi::RaspberryPi (void)
 {
 	ready = 0;
@@ -97,6 +107,12 @@ Gpio *RaspberryPi::getGpio (void)
 {
 	return gpio;
 }
+
+Pin	*RaspberryPi::getPin (int pinNumber)
+{
+	return gpio->getPin(pinNumber);
+}
+
 
 
 void RaspberryPi::getCpuInfo (void)

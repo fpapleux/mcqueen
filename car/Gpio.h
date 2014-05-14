@@ -34,8 +34,7 @@ public:
 private:
 	int		version;
 	int		ready;
-	Pin		*pin[26];
-
+	Pin		*pin[26];	// holds pointers to Pin objects
 };
 
 #endif /* GPIO_H_ */
