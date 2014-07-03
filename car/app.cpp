@@ -24,6 +24,7 @@ int main (int argv, char** args) {
 
 	if (car.isReady()) {
 
+		/*
 		car.stop();
 		Pin *p1 = car.getRaspberryPi()->getPin(13);
 		Pin *p2 = car.getRaspberryPi()->getPin(15);
@@ -63,9 +64,10 @@ int main (int argv, char** args) {
 		}
 		p1->setValue(LOW);
 	}
+	*/
 
-		/*
-		in = "";
+		string in = "";
+		int pct, pin;
 		while (in != "quit") {
 
 			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q" && in != "i" && in != "I") {
@@ -115,8 +117,6 @@ int main (int argv, char** args) {
 		}
 		car.stop();
 	}
-
-	*/
 
 }
 
