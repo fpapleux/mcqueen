@@ -81,7 +81,7 @@ int main (int argv, char** args) {
 				cin >> in;
 				try { pct = stoi(in); }
 				catch (const invalid_argument& e) { }
-				if (pct) { car.speedPct(pct); }
+				if ((pct >=- 100) && (pct <= 100)) car.speedPct(pct);
 			}
 
 			if (in == "w" || in == "W") {
@@ -90,7 +90,7 @@ int main (int argv, char** args) {
 				cin >> in;
 				try { pct = stoi(in); }
 				catch (const invalid_argument& e) { }
-				if (pct) { car.turnPct(pct); }
+				if ((pct >= -100) && (pct <= 100)) { car.turnPct(pct); }
 			}
 
 			if (in == "q" || in == "Q") {
