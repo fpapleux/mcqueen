@@ -71,8 +71,12 @@ int main (int argv, char** args) {
 		while (in != "quit") {
 
 			while (in != "W" && in != "w" && in != "P" && in != "p" && in != "Q" && in != "q" && in != "i" && in != "I") {
-				cout << "(W)heels, (P)ower, P(i)n control, (Q)uit : ";
+				cout << "(W)heels, (P)ower, P(i)n control, (R)ead sensor, (Q)uit : ";
 				cin >> in;
+			}
+
+			if (in == "r" || in == "R") {
+				cout << "Not implemented yet.";
 			}
 
 			if (in == "p" || in == "P") {
