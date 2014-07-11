@@ -4,7 +4,8 @@
  *
  **/
 
-char inCommand [20] = {};   // string to receive commands on the serial line
+char inCommand [20] = {
+};   // string to receive commands on the serial line
 int ledRX = 5;
 int ledTX = 6;
 
@@ -21,9 +22,9 @@ void loop() {
   // Turn off leds
   digitalWrite (ledRX, LOW);
   digitalWrite (ledTX, LOW);
-  
+
   // Read sensors
-  
+
   // Check for serial request
   bytesToRead = Serial.available();
   if (bytesToRead > 0) {
@@ -32,5 +33,6 @@ void loop() {
     delay(50);
   }
 }
+
 
 
