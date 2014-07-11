@@ -4,20 +4,46 @@
  *
  **/
 
-char inCommand [20] = {
-};   // string to receive commands on the serial line
+
+/**
+ * -----------------------------------------------------------------------------------------------
+ * Global variables declaration
+ * -----------------------------------------------------------------------------------------------
+ **/
+char inCommand [255] = {};   // string to receive commands on the serial line
+int inCommandPos = 0;
+char reply [4096] = {};
+
 int ledRX = 5;
 int ledTX = 6;
+int ledTest = 13;
 
+
+/**
+ * -----------------------------------------------------------------------------------------------
+ * Setup Routine
+ * -----------------------------------------------------------------------------------------------
+ **/
 void setup() {
   Serial.begin(9600);
   pinMode(ledRX, OUTPUT);
   pinMode(ledTX, OUTPUT);
+  pinMode(ledTest, OUTPUT);
+  i2c_init(ledTest);
 }
 
+
+
+
+/**
+ * -----------------------------------------------------------------------------------------------
+ * Main program loop
+ * -----------------------------------------------------------------------------------------------
+ **/
 void loop() {
   int bytesToRead = 0;
   int incomingByte = 0;
+  inCommandPos = 0;
 
   // Turn off leds
   digitalWrite (ledRX, LOW);
@@ -30,9 +56,23 @@ void loop() {
   if (bytesToRead > 0) {
     incomingByte = Serial.read();
     digitalWrite(ledRX, HIGH);
-    delay(50);
+    delay(25);
+
+    // reading bytes until end of command is received (";")
+    inCommand[inCommandPos++]=incomingByte;
+    
   }
 }
 
+
+
+/** List of IN-COMMANDS RECOGNIZED BY THE SYSTEM:
+    
+    !!! Important Notes
+    - All commands are case sensitive
+
+    I2C-INIT
+
+**/
 
 
