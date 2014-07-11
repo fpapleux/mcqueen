@@ -29,7 +29,7 @@ void setup() {
   pinMode(ledRX, OUTPUT);
   pinMode(ledTX, OUTPUT);
   pinMode(ledTest, OUTPUT);
-  i2c_init(ledTest);
+
 }
 
 
@@ -42,7 +42,7 @@ void setup() {
  **/
 void loop() {
   int bytesToRead = 0;
-  int incomingByte = 0;
+  byte incomingByte = 0;
   inCommandPos = 0;
 
   // Turn off leds

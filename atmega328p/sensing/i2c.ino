@@ -4,24 +4,16 @@
  **/
 
 
-
-void i2c_init (int led) {
-  // Blink led 
-  digitalWrite (led, HIGH);
-  delay (50);
-  digitalWrite (led, LOW);
-  delay (50);
-  digitalWrite (led, HIGH);
-  delay (50);
-  digitalWrite (led, LOW);
-  delay (50);
-  digitalWrite (led, HIGH);
-  delay (50);
-  digitalWrite (led, LOW);
-  delay (50);
-  digitalWrite (led, HIGH);
-  delay (50);
-  digitalWrite (led, LOW);
-  delay (50);
+class i2c_bus {
   
+  public:
+  void init();
+
+};
+
+void i2c_bus::init() {
+  return;
 }
+
+
+
