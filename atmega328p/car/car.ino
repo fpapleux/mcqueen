@@ -17,9 +17,12 @@ void loop()
     throttle_idle();
     delay (2000);
     
-    dir_rightPct (50);
     throttle_forwardPct (25);
-    delay (3000);
+    delay (2000);
+    throttle_reversePct (25);
+    delay (2000);
+    throttle_forwardPct (25);
+    delay (2000);
 
     i++;
   }
