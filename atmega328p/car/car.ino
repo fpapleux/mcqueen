@@ -1,27 +1,42 @@
 
-#include <Servo.h>
-
-Servo wheel;
 int i;
 
 void setup()
 {
-  wheel.attach(9);
+  dir_init ();
   i = 0;
 }
 
 void loop()
 {
-  wheel.writeMicroseconds(1500);
-  delay(1500);
+
   if (i < 4) {
-    wheel.writeMicroseconds(1000);
-    delay(1500);
-    wheel.writeMicroseconds(1500);
-    delay(1500);
-    wheel.writeMicroseconds(2000);
-    delay(1500);
+
+    dir_straight();
+    
+    dir_leftPct (25);
+    delay(1000);
+    dir_leftPct (50);
+    delay(1000);
+    dir_leftPct (75);
+    delay(1000);
+    dir_leftPct (100);
+    delay(1000);
+  
+    dir_straight ();
+    delay(1000);
+  
+    dir_rightPct (25);
+    delay(1000);
+    dir_rightPct (50);
+    delay(1000);
+    dir_rightPct (75);
+    delay(1000);
+    dir_rightPct (100);
+    delay(1000);
+
     i++;
   }
+
 }
 
