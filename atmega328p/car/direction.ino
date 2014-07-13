@@ -17,7 +17,7 @@ void dir_set (int pulse) {
 }
 
 void dir_leftPct (int pct) {
-  dir.writeMicroseconds ( MIDDLE - ( (MIDDLE-MAXLEFT)*(pct/100) ) );
+  dir.writeMicroseconds ( int( double(MIDDLE - ( (MIDDLE-MAXLEFT)*(pct/100) ))) );
 }
 
 void dir_rightPct (int pct) {
