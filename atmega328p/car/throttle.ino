@@ -38,11 +38,11 @@ void throttle_reversePct (int pct) {
 
   if (throttle_pulse < THROTTLE_IDLE) {
     throttle_idle ();
-    delay (50);
+    delay (100);
     throttle.writeMicroseconds ( newPulse );
-    delay (50);
+    delay (100);
     throttle_idle ();
-    delay (50);
+    delay (100);
   }
   throttle.writeMicroseconds ( newPulse );
   throttle_pulse = newPulse;

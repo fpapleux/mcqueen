@@ -11,7 +11,7 @@ void setup()
 void loop()
 {
 
-  if (i < 2) {
+  if (i < 3) {
 
     dir_straight();
     throttle_idle();
@@ -19,14 +19,6 @@ void loop()
     
     dir_leftPct (50);
     throttle_forwardPct (25);
-    delay (3000);
-
-    dir_straight();
-    throttle_idle();
-    delay (2000);    
-  
-    dir_rightPct (50);
-    throttle_reversePct (25);
     delay (3000);
 
     i++;
