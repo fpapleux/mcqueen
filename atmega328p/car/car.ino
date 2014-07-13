@@ -4,6 +4,7 @@ int i;
 void setup()
 {
   dir_init ();
+  throttle_init();
   i = 0;
 }
 

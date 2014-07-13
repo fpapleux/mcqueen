@@ -3,7 +3,7 @@
 #define THROTTLE_MAXREVERSE  1000
 #define THROTTLE_MAXFORWARD  2000
 #define THROTTLE_IDLE        1500
-#define THROTTLEPIN          5
+#define THROTTLEPIN          10
 
 Servo throttle;
 int throttle_pulse;
