@@ -21,7 +21,7 @@ void dir_leftPct (int pct) {
 }
 
 void dir_rightPct (int pct) {
-  dir.writeMicroseconds ( MIDDLE + ( (MAXRIGHT-MIDDLE)*(pct/100) ) );
+  dir.writeMicroseconds ( int( double(MIDDLE + ( double(MAXRIGHT-MIDDLE)*(double(pct)/100) ))) );
 }
 
 void dir_straight () {
