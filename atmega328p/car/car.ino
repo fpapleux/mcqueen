@@ -6,29 +6,30 @@ void setup()
   dir_init ();
   throttle_init();
   i = 0;
+  Serial.begin (9600);
+  pinMode (5, INPUT);
 }
 
 void loop()
 {
 
-  if (i < 3) {
-
-    dir_straight();
-    throttle_idle();
-    delay (2000);
-    
-    throttle_forwardPct (25);
-    delay (2000);
-    throttle_reversePct (25);
-    delay (2000);
-    throttle_forwardPct (25);
-    delay (2000);
-
-    i++;
+  char in;
+  int pulse = 0;
+  int cm = 0;
+  
+  if (Serial.available() > 0) {
+  
+    in = Serial.read();
+    if (in == 32) {
+      pulse = pulseIn (5, HIGH);
+      cm = (pulse / 147) * 2.54;
+      Serial.println ("");
+      Serial.print ("distance: ");
+      Serial.print (cm);
+      Serial.println (" cm");
+    }  
+  
   }
-
-  dir_straight();
-  throttle_idle ();
   
 }
 
