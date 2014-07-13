@@ -1,0 +1,54 @@
+#include <Servo.h>
+
+#define THROTTLE_MAXREVERSE  1000
+#define THROTTLE_MAXFORWARD  2000
+#define THROTTLE_IDLE        1500
+#define THROTTLEPIN          10
+
+Servo throttle;
+int throttle_pulse;
+
+void throttle_init () {
+  throttle.attach (THROTTLEPIN);
+
+  // ESC init sequence
+  throttle_set ( THROTTLE_MAXFORWARD );
+  delay (5);
+  throttle_set ( THROTTLE_MAXREVERSE );
+  delay (5);
+  throttle_set ( THROTTLE_IDLE );
+
+  throttle_pulse = THROTTLE_IDLE;
+}
+
+void throttle_set (int pulse) {
+  throttle.writeMicroseconds (pulse);
+  throttle_pulse = pulse;
+}
+
+void throttle_reversePct (int pct) {
+  int newPulse = int( double(THROTTLE_IDLE - ( double(THROTTLE_IDLE - THROTTLE_MAXREVERSE)*(double(pct)/100) )));
+
+  if (throttle_pulse > THROTTLE_IDLE) {
+    throttle_idle ();
+    delay (50);
+    throttle.writeMicroseconds ( newPulse );
+    delay (50);
+    throttle_idle ();
+    delay (50);
+  }
+  throttle.writeMicroseconds ( newPulse );
+  throttle_pulse = newPulse;
+}
+
+void throttle_forwardPct (int pct) {
+  int newPulse = int( double(THROTTLE_IDLE + ( double(THROTTLE_MAXFORWARD - THROTTLE_IDLE)*(double(pct)/100) )));
+  throttle.writeMicroseconds ( newPulse );
+  throttle_pulse = newPulse;
+}
+
+void throttle_idle () {
+  throttle.writeMicroseconds ( THROTTLE_IDLE );
+  throttle_pulse = THROTTLE_IDLE;
+}
+
