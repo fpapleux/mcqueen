@@ -14,15 +14,15 @@ void loop()
 {
 
   char in;
-  int pulse = 0;
-  int cm = 0;
+  long pulse = 0;
+  long cm = 0;
   
   if (Serial.available() > 0) {
   
     in = Serial.read();
     if (in == 32) {
       pulse = pulseIn (5, HIGH);
-      cm = (pulse / 147) * 2.54;
+      cm = int((double(pulse / 147)) * 2.54);
       Serial.println ("");
       Serial.print ("distance: ");
       Serial.print (cm);
