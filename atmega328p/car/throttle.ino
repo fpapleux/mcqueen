@@ -36,7 +36,7 @@ void throttle_forwardPct (int pct) {
 void throttle_reversePct (int pct) {
   int newPulse = int( double(THROTTLE_IDLE - ( double(abs(THROTTLE_IDLE - THROTTLE_MAXREVERSE))*(double(pct)/100) )));
 
-  if (throttle_pulse < THROTTLE_IDLE) {
+  if (throttle_pulse > THROTTLE_IDLE) {
     throttle_idle ();
     delay (100);
     throttle.writeMicroseconds ( newPulse );
