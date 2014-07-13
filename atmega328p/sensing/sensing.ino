@@ -4,7 +4,6 @@
  *
  **/
 
-
 /**
  * -----------------------------------------------------------------------------------------------
  * Global variables declaration
@@ -16,7 +15,7 @@ char reply [4096] = {};
 
 int ledRX = 5;
 int ledTX = 6;
-int ledTest = 13;
+
 
 
 /**
@@ -28,8 +27,6 @@ void setup() {
   Serial.begin(9600);
   pinMode(ledRX, OUTPUT);
   pinMode(ledTX, OUTPUT);
-  pinMode(ledTest, OUTPUT);
-
 }
 
 
@@ -71,7 +68,6 @@ void loop() {
     !!! Important Notes
     - All commands are case sensitive
 
-    I2C-INIT
 
 **/
 
