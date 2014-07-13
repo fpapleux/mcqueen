@@ -22,7 +22,7 @@ void loop()
     in = Serial.read();
     if (in == 32) {
       pulse = pulseIn (5, HIGH);
-      cm = int((double(pulse / 147)) * 2.54);
+      cm = int((double(pulse) / 147) * 2.54);
       Serial.println ("");
       Serial.print ("distance: ");
       Serial.print (cm);
