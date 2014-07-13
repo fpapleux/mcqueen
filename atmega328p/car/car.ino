@@ -38,5 +38,7 @@ void loop()
     i++;
   }
 
+  dir_straight();
+  
 }
 
