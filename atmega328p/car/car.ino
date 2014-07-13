@@ -1,18 +1,40 @@
 
-int i;
+
+long o;
 
 void setup()
 {
   dir_init ();
   throttle_init();
-  i = 0;
   Serial.begin (9600);
   pinMode (5, INPUT);
+  o = 0;
 }
 
 void loop()
 {
+  if ((o = getSensorCm()) > 60)
+  {
+    throttle_forwardPct(2);
+  }
+  else throttle_idle();
+  
+}
 
+long getSensorCm()
+{
+  long pulse = 0;
+  long cm = 0;
+  pulse = pulseIn (5, HIGH);
+  cm = int((double(pulse) / 147) * 2.54);
+  Serial.print ("distance: ");
+  Serial.print (cm);
+  Serial.println (" cm");
+  return cm;
+}
+
+void test_sensor ()
+{
   char in;
   long pulse = 0;
   long cm = 0;
@@ -23,13 +45,11 @@ void loop()
     if (in == 32) {
       pulse = pulseIn (5, HIGH);
       cm = int((double(pulse) / 147) * 2.54);
-      Serial.println ("");
       Serial.print ("distance: ");
       Serial.print (cm);
       Serial.println (" cm");
     }  
   
   }
-  
 }
 
