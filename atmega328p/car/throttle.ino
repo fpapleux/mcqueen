@@ -27,14 +27,14 @@ void throttle_set (int pulse) {
 }
 
 void throttle_forwardPct (int pct) {
-  int newPulse = int( double(THROTTLE_IDLE - ( double(THROTTLE_IDLE - THROTTLE_MAXFORWARD)*(double(pct)/100) )));
+  int newPulse = int( double(THROTTLE_IDLE - ( double(abs(THROTTLE_IDLE - THROTTLE_MAXFORWARD))*(double(pct)/100) )));
 
   throttle.writeMicroseconds ( newPulse );
   throttle_pulse = newPulse;
 }
 
 void throttle_reversePct (int pct) {
-  int newPulse = int( double(THROTTLE_IDLE + ( double(THROTTLE_MAXREVERSE - THROTTLE_IDLE)*(double(pct)/100) )));
+  int newPulse = int( double(THROTTLE_IDLE + ( double(abs(THROTTLE_IDLE - THROTTLE_MAXREVERSE))*(double(pct)/100) )));
 
   if (throttle_pulse < THROTTLE_IDLE) {
     throttle_idle ();
