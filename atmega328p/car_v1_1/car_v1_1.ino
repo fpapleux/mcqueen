@@ -13,7 +13,7 @@ void setup()
 
 void loop()
 {
-  if ((o = getSensorCm()) > 50)
+  if ((o = getSensorCm()) > 35)
   {
     throttle_forwardPct(13);
   }
