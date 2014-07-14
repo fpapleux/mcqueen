@@ -54,8 +54,11 @@ void throttle_idle () {
 }
 
 void throttle_stop () {
+  /*
   int i;
   if (throttle_pulse > THROTTLE_IDLE) {
+
+
     for (i=throttle_pulse; i > THROTTLE_IDLE; i-=10) {
       throttle_set (i);
       delay (20);
@@ -67,6 +70,7 @@ void throttle_stop () {
       delay (20);
     }
   }
+  */
   throttle.writeMicroseconds ( THROTTLE_IDLE );
   throttle_pulse = THROTTLE_IDLE;
 }
