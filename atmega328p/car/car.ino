@@ -17,7 +17,9 @@ void loop()
   {
     throttle_forwardPct(20);
   }
-  else throttle_idle();
+  else {
+    throttle_stop();
+  }
   
 }
 

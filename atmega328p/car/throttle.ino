@@ -53,3 +53,16 @@ void throttle_idle () {
   throttle_pulse = THROTTLE_IDLE;
 }
 
+void throttle_stop () {
+  if (throttle_pulse > THROTTLE_IDLE) {
+    throttle_reversePct (15);
+    delay (10);
+  }
+  else if (throttle_pulse < THROTTLE_IDLE) {
+    throttle_forwardPct (15);
+    delay (10);
+  }
+  throttle.writeMicroseconds ( THROTTLE_IDLE );
+  throttle_pulse = THROTTLE_IDLE;
+}
+
