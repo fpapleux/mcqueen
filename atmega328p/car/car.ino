@@ -15,7 +15,7 @@ void loop()
 {
   if ((o = getSensorCm()) > 60)
   {
-    throttle_forwardPct(10);
+    throttle_forwardPct(20);
   }
   else throttle_idle();
   
