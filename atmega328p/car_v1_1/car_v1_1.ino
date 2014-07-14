@@ -13,13 +13,13 @@ void setup()
 
 void loop()
 {
-  if ((o = getSensorCm()) > 100)
+  if ((o = getSensorCm()) > 50)
   {
-    throttle_forwardPct(17);
+    throttle_forwardPct(13);
   }
   else {
     throttle_stop();
-    delay(1000);
+    delay(500);
     dir_leftPct(100);
     delay(100);
     throttle_reversePct(20);
