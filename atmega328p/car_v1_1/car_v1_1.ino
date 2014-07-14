@@ -19,15 +19,15 @@ void loop()
   }
   else {
     throttle_stop();
-    delay(2000);
+    delay(1000);
     dir_leftPct(100);
-    delay(200);
+    delay(100);
     throttle_reversePct(20);
-    delay(500);
+    delay(600);
     throttle_stop();
-    delay(500);
+    delay(100);
     dir_straight();
-    delay(200);
+    delay(100);
   }
   
 }
