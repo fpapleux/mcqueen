@@ -23,8 +23,11 @@ void loop()
     dir_leftPct(100);
     delay(200);
     throttle_reversePct(20);
-    delay(5000);
+    delay(500);
     throttle_stop();
+    delay(500);
+    dir_straight();
+    delay(200);
   }
   
 }
