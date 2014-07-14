@@ -13,9 +13,9 @@ void throttle_init () {
 
   // ESC init sequence
   throttle_set ( THROTTLE_MAXFORWARD );
-  delay (5);
+  delay (25);
   throttle_set ( THROTTLE_MAXREVERSE );
-  delay (5);
+  delay (25);
   throttle_set ( THROTTLE_IDLE );
 
   throttle_pulse = THROTTLE_IDLE;
